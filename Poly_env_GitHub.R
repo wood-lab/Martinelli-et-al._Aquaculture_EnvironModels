@@ -367,7 +367,6 @@ ketchikan.summ$ID <- paste(ketchikan.summ$Year, ketchikan.summ$Season, ketchikan
 ### tillamook BAY BUOY
 ###########################################################
 tillamook <- read.table("tillamook/CSVs/tillamook SST.csv", header=T, sep=",")
-colnames(tillamook) <- c('Date','SST', show_col_types = FALSE)
 tillamook <- mutate(tillamook, Buoy = "Tillamook") # adding col for buoy
 
 # dumping time bc I dont need it
