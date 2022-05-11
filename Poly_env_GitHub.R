@@ -251,8 +251,7 @@ coos.summ$ID <- paste(coos.summ$Year, coos.summ$Season, coos.summ$Buoy)
 ###########################################################
 ### BODEGA BAY BUOY
 ###########################################################
-setwd('/bodega bay/')
-mydir <- 'CSVs'
+mydir <- 'bodega bay/CSVs'
 env.files <- list.files(path=mydir, pattern="*.csv", full.names=TRUE)
 env.files # check the list of files is okay
 
@@ -394,8 +393,7 @@ tillamook.summ$ID <- paste(tillamook.summ$Year, tillamook.summ$Season, tillamook
 ###########################################################
 ### tomales BAY BUOY
 ###########################################################
-setwd('/tomales/')
-mydir <- 'CSVs'
+mydir <- 'tomales/CSVs'
 env.files <- list.files(path=mydir, pattern="*.csv", full.names=TRUE)
 env.files # check the list of files is okay
 
@@ -435,8 +433,7 @@ tom.summ$ID <- paste(tom.summ$Year, tom.summ$Season, tom.summ$Buoy)
 ###########################################################
 ### humboldt BAY BUOY
 ###########################################################
-setwd('/humboldt/')
-mydir <- 'CSVs'
+mydir <- 'humboldt/CSVs'
 env.files <- list.files(path=mydir, pattern="*.csv", full.names=TRUE)
 env.files # check the list of files is okay
 
@@ -579,7 +576,7 @@ buoys <- bind_rows(data, carr, cherry, hoodsport, ptownsend, tokeland, bayview,
 ########################
 # CHECKING FOR CORRELATION IN ENV VARIABLES
 buoys <- as.data.frame(buoys) # turning tibble into df
-buoys.mat <- buoys[, c(2:7,11:14)] # selecting the cols with 
+buoys.mat <- buoys[, c(2:7,11:14)] # selecting the cols with numbers
 
 matrix <- cor(buoys.mat, use="pairwise.complete.obs")
 par(xpd = TRUE)
@@ -605,7 +602,7 @@ buoys$pH_sc <- scale(buoys$pH, center = TRUE, scale = TRUE)
 ###########################################################
 ## ADDING prev DATASET
 ###########################################################
-prev <- read.table("PolydoraEnv/master_spreadsheet_all.csv", header=T, sep=",")
+prev <- read.table("master_spreadsheet_all.csv", header=T, sep=",")
 # remove L valves to avoid duplication of weights etc
 prev <- subset(prev, prev$Valve =='R') # only keep R valves
 prev <- prev %>% separate(Date, sep="/", into = c('Month', 'Day', 'Year'))
