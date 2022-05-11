@@ -1,5 +1,3 @@
-rawdata<-read.table("data/lingcod_psite_data.csv",header=T,sep=",")
-PolydoraEnv > Bellingham buoy > CSVs > Bellingham_buoy.csv.
 
 ### WORKING DIRECTORY AND PACKAGES
 ###########################################################
@@ -253,7 +251,7 @@ coos.summ$ID <- paste(coos.summ$Year, coos.summ$Season, coos.summ$Buoy)
 ###########################################################
 ### BODEGA BAY BUOY
 ###########################################################
-setwd('/PolydoraEnv/Coos Bay buoy/')
+setwd('/bodega bay/')
 mydir <- 'CSVs'
 env.files <- list.files(path=mydir, pattern="*.csv", full.names=TRUE)
 env.files # check the list of files is okay
@@ -397,7 +395,7 @@ tillamook.summ$ID <- paste(tillamook.summ$Year, tillamook.summ$Season, tillamook
 ###########################################################
 ### tomales BAY BUOY
 ###########################################################
-setwd('PolydoraEnv/tomales/')
+setwd('/tomales/')
 mydir <- 'CSVs'
 env.files <- list.files(path=mydir, pattern="*.csv", full.names=TRUE)
 env.files # check the list of files is okay
@@ -438,7 +436,7 @@ tom.summ$ID <- paste(tom.summ$Year, tom.summ$Season, tom.summ$Buoy)
 ###########################################################
 ### humboldt BAY BUOY
 ###########################################################
-setwd('PolydoraEnv/humboldt/')
+setwd('/humboldt/')
 mydir <- 'CSVs'
 env.files <- list.files(path=mydir, pattern="*.csv", full.names=TRUE)
 env.files # check the list of files is okay
