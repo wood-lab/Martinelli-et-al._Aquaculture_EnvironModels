@@ -19,7 +19,7 @@ library(lme4)
 ###########################################################
 ### BELLINGHAM
 ###########################################################
-data <- read.table("PolydoraEnv/Bellingham buoy/CSVs/Bellingham_buoy.csv", header=T,sep=",")
+data <- read.table("Bellingham buoy/CSVs/Bellingham_buoy.csv", header=T,sep=",")
 colnames(data) <- c('Date','DOsat', 'SST','Salinity','DOconc', 'Turbidity','Chlorophyll')
 data <- mutate(data, Buoy = "Bellingham") # adding col for buoy
 
@@ -51,7 +51,7 @@ data.summ$ID <- paste(data.summ$Year, data.summ$Season, data.summ$Buoy)
 ###########################################################
 ### Carr Inlet
 ###########################################################
-carr <- read.table("PolydoraEnv/Carr Inlet/CSVs/Carr.csv", header=T,sep=",")
+carr <- read.table("Carr Inlet/CSVs/Carr.csv", header=T,sep=",")
 colnames(carr) <- c('Date','pH', 'Salinity', 'SST')
 carr <- mutate(carr, Buoy = "Carr Inlet") # adding col for buoy
 
@@ -81,7 +81,7 @@ carr.summ$ID <- paste(carr.summ$Year, carr.summ$Season, carr.summ$Buoy)
 ###########################################################
 ### Cherry Point
 ###########################################################
-cherry <- read.table("PolydoraEnv/cherry point/CSVs/cherry point SST.csv", header=T,sep=",")
+cherry <- read.table("cherry point/CSVs/cherry point SST.csv", header=T,sep=",")
 colnames(cherry) <- c('Date','SST')
 cherry <- mutate(cherry, Buoy = "Cherry Point") # adding col for buoy
 
@@ -110,7 +110,7 @@ cherry.summ$ID <- paste(cherry.summ$Year, cherry.summ$Season, cherry.summ$Buoy)
 ###########################################################
 ### Hoodsport
 ###########################################################
-hoodsport <- read.table("PolydoraEnv/Hoodsport/CSVs/Hoodsport.csv", header=T, sep=",")
+hoodsport <- read.table("Hoodsport/CSVs/Hoodsport.csv", header=T, sep=",")
 colnames(hoodsport) <- c('Date','SST', 'Salinity', 'pH')
 hoodsport <- mutate(hoodsport, Buoy = "Hoodsport") # adding col for buoy
 
@@ -139,7 +139,7 @@ hoodsport.summ$ID <- paste(hoodsport.summ$Year, hoodsport.summ$Season, hoodsport
 ###########################################################
 ### Port Townsend
 ###########################################################
-ptownsend <- read.table("PolydoraEnv/port townsend/CSVs/PortTownsend.csv", header=T,sep=",")
+ptownsend <- read.table("port townsend/CSVs/PortTownsend.csv", header=T,sep=",")
 colnames(ptownsend) <- c('Date','SST')
 ptownsend <- mutate(ptownsend, Buoy = "Port Townsend") # adding col for buoy
 
@@ -168,7 +168,7 @@ ptownsend.summ$ID <- paste(ptownsend.summ$Year, ptownsend.summ$Season, ptownsend
 ###########################################################
 ### Tokeland
 ###########################################################
-tokeland <- read.table("PolydoraEnv/tokeland/CSVs/Tokeland.csv", header=T, sep=",")
+tokeland <- read.table("tokeland/CSVs/Tokeland.csv", header=T, sep=",")
 colnames(tokeland) <- c('Date','SST', 'Salinity', 'DO', 'pH')
 tokeland <- mutate(tokeland, Buoy = "Tokeland") # adding col for buoy
 
@@ -197,7 +197,7 @@ tokeland.summ$ID <- paste(tokeland.summ$Year, tokeland.summ$Season, tokeland.sum
 ###########################################################
 ### Bayview
 ###########################################################
-bayview <- read.table("PolydoraEnv/Bayview channel/CSVs/Bay view channel.csv", header=T, sep=",")
+bayview <- read.table("Bayview channel/CSVs/Bay view channel.csv", header=T, sep=",")
 colnames(bayview) <- c('Date','SST', 'Salinity', 'DO', 'depth','pH')
 bayview <- mutate(bayview, Buoy = "Bayview") # adding col for buoy
 
@@ -224,7 +224,7 @@ bayview <- bayview[-todrop,]
 ###########################################################
 ### COOS BAY BUOY
 ###########################################################
-coos <- read.table("PolydoraEnv/Coos Bay buoy/CSVs/BCoos Bay buoy.csv", header=T, sep=",")
+coos <- read.table("Coos Bay buoy/CSVs/Coos Bay buoy.csv", header=T, sep=",")
 colnames(coos) <- c('Date','SST', 'Salinity', 'DO', 'depth','pH', 'Turbidity')
 coos <- mutate(coos, Buoy = "Coos") # adding col for buoy
 
@@ -289,7 +289,7 @@ bodega.summ$ID <- paste(bodega.summ$Year, bodega.summ$Season, bodega.summ$Buoy)
 ###########################################################
 ### yaquina BAY BUOY
 ###########################################################
-yaquina <- read.table("PolydoraEnv/yaquina/CSVs/yaquina SST.csv", header=T, sep=",")
+yaquina <- read.table("yaquina/CSVs/yaquina SST.csv", header=T, sep=",")
 yaquina <- mutate(yaquina, Buoy = "Yaquina") # adding col for buoy
 
 # dumping time bc I dont need it
@@ -317,7 +317,7 @@ yaquina.summ$ID <- paste(yaquina.summ$Year, yaquina.summ$Season, yaquina.summ$Bu
 ###########################################################
 ### netarts BAY BUOY: only annual data
 ###########################################################
-netarts <- read.table("PolydoraEnv/netarts bay/CSVs/Netarts bay.csv", header=T, sep=",")
+netarts <- read.table("netarts bay/CSVs/Netarts bay.csv", header=T, sep=",")
 netarts <- netarts[,(5:8)] # read all the files 
 
 colnames(netarts) <- c('pH','Salinity','SST','Year')
@@ -339,7 +339,7 @@ netarts.summ$ID <- paste(netarts.summ$Date)
 ###########################################################
 ### ketchikan BAY BUOY
 ###########################################################
-ketchikan <- read.table("PolydoraEnv/Ketchikan/CSVs/ketchikan temp.csv", header=T, sep=",")
+ketchikan <- read.table("Ketchikan/CSVs/ketchikan temp.csv", header=T, sep=",")
 colnames(ketchikan) <- c('Date','SST')
 ketchikan <- mutate(ketchikan, Buoy = "Ketchikan") # adding col for buoy
 
@@ -368,7 +368,7 @@ ketchikan.summ$ID <- paste(ketchikan.summ$Year, ketchikan.summ$Season, ketchikan
 ###########################################################
 ### tillamook BAY BUOY
 ###########################################################
-tillamook <- read.table("PolydoraEnv/tillamook/CSVs/tillamook SST.csv", header=T, sep=",")
+tillamook <- read.table("tillamook/CSVs/tillamook SST.csv", header=T, sep=",")
 colnames(tillamook) <- c('Date','SST', show_col_types = FALSE)
 tillamook <- mutate(tillamook, Buoy = "Tillamook") # adding col for buoy
 
@@ -478,7 +478,7 @@ humboldt.summ$ID <- paste(humboldt.summ$Year, humboldt.summ$Season, humboldt.sum
 ###########################################################
 ### homer BAY BUOY
 ###########################################################
-homer <- read.table("PolydoraEnv/Homer surface/CSVs/Homer surface.csv", header=T, sep=",")
+homer <- read.table("Homer surface/CSVs/Homer surface.csv", header=T, sep=",")
 colnames(homer) <- c('Date','SST','Salinity','DO','Depth','pH', 'Turbidity')
 homer <- mutate(homer, Buoy = "Homer") # adding col for buoy
 
@@ -507,7 +507,7 @@ homer.summ$ID <- paste(homer.summ$Year, homer.summ$Season, homer.summ$Buoy)
 ###########################################################
 ### PT ALEXANDER BUOY
 ###########################################################
-portalex <- read.table("PolydoraEnv/port alexander/CSVs/PtAlexander_SST.csv", header=T, sep=",")
+portalex <- read.table("port alexander/CSVs/PtAlexander_SST.csv", header=T, sep=",")
 colnames(portalex) <- c('Date','SST')
 portalex <- mutate(portalex, Buoy = "P Alexander") # adding col for buoy
 
