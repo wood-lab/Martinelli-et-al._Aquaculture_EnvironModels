@@ -255,7 +255,7 @@ mydir <- 'bodega bay/CSVs'
 env.files <- list.files(path=mydir, pattern="*.csv", full.names=TRUE)
 env.files # check the list of files is okay
 
-bodega <- ldply(env.files, read_csv, show_col_types = FALSE) # read all the files 
+bodega <- ldply(env.files, read_csv) # read all the files 
 colnames(bodega) <- c('Date','Salinity','SST')
 bodega <- mutate(bodega, Buoy = "Bodega") # adding col for buoy
 
@@ -397,7 +397,7 @@ mydir <- 'tomales/CSVs'
 env.files <- list.files(path=mydir, pattern="*.csv", full.names=TRUE)
 env.files # check the list of files is okay
 
-tom <- ldply(env.files, read_csv, show_col_types = FALSE) # read all the files 
+tom <- ldply(env.files, read_csv) # read all the files 
 tom <- tom[,(-3)]
 colnames(tom) <- c('Date','Chlorophyll', 'pH', 'Salinity', 'SST')
 tom <- mutate(tom, Buoy = "Tomales") # adding col for buoy
