@@ -625,6 +625,8 @@ prev$y <- as.numeric(prev$y)
 prev$z <- as.numeric(prev$z)
 
 prev$Lat_sc <- scale(prev$Lat, center = TRUE, scale = TRUE) # scaling lat
+str(prev)
+
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
