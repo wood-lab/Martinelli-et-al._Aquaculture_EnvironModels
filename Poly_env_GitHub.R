@@ -596,7 +596,7 @@ buoys$Chlorophyll_sc <- scale(buoys$Chlorophyll, center = TRUE, scale = TRUE)
 buoys$pH_sc <- scale(buoys$pH, center = TRUE, scale = TRUE)
 
 buoys_averaged <- buoys %>%
-  group_by(Year) %>%
+  group_by(ID) %>%
   summarize_at(vars(SST,Salinity,DOsat,Turbidity,Chlorophyll,pH),funs(mean = mean(.,na.rm=TRUE)))
 
 ###########################################################
@@ -625,14 +625,21 @@ str(prev)
 
 ### MERGING DATASETS
 ###########################################################
-prev <- merge(prev, buoys_averaged, all.x = TRUE)
-todrop <- which(prev$Year < 2019) 
-prev <- prev[-todrop,]
+fulldata <- merge(prev, buoys_averaged, merge.by=ID, all.x = TRUE)
+# todrop <- which(fulldata$Year < 2019) 
+# fulldata <- fulldata[-todrop,]
+
+
+summarytab <- fulldata %>%
+  group_by(Year, Bay, Farm) %>%
+  summarize_at(vars(SST_mean,Salinity_mean,DOsat_mean,Turbidity_mean,Chlorophyll_mean,pH_mean),funs(mean = mean(.,na.rm=TRUE)))
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
-mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Date) + (1|State/Bay/Farm), family="binomial", data = prev)
+mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|State/Bay/Farm), family="binomial", data = fulldata)
 summary(mod)
+anova(mod)
+vif(mod)
 # + DOsat_mean + Turbidity_mean + Chlorophyll_mean
 
 mod2 <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + pH_mean*State + SST_mean*State + Salinity_mean*State + (1|Year) + (1|State/Bay/Farm), family="binomial", data = prev)
