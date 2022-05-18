@@ -529,9 +529,6 @@ portalex.summ$ID <- paste(portalex.summ$Year, portalex.summ$Season, portalex.sum
 
 ########################
 ## checking class for each dataset bc I cant bind them
-# data,carr,cherry,hoodsport,ptownsend,tokeland,bayview,coos,bodega, 
-# netarts,ketchikan,tillamook, tom,humboldt, homer, portalex, yaquina,
-
 sapply(yaquina, class)
 yaquina$Year <- as.numeric(yaquina$Year)
 sapply(portalex, class)
@@ -569,9 +566,8 @@ ketchikan$Year <- as.numeric(ketchikan$Year)
 
 ########################
 ## binding all the buoys
-buoys <- bind_rows(data, carr, cherry, hoodsport, ptownsend, tokeland, bayview, 
-                   coos, bodega, yaquina, netarts,  ketchikan, tillamook, tom,
-                   humboldt, homer, portalex)
+buoys <- bind_rows(data, carr, cherry, hoodsport, ptownsend, tokeland, bayview, coos, 
+        bodega, yaquina, netarts, ketchikan, tillamook, tom, humboldt, homer, portalex)
 
 ########################
 # CHECKING FOR CORRELATION IN ENV VARIABLES
@@ -599,6 +595,10 @@ buoys$Turbidity_sc <- scale(buoys$Turbidity, center = TRUE, scale = TRUE)
 buoys$Chlorophyll_sc <- scale(buoys$Chlorophyll, center = TRUE, scale = TRUE)
 buoys$pH_sc <- scale(buoys$pH, center = TRUE, scale = TRUE)
 
+buoys_averaged <- buoys %>%
+  group_by(Year) %>%
+  summarize_at(vars(SST,Salinity,DO,Turbidity,Chlorophyll,pH),funs(mean = mean(.,na.rm=TRUE)))
+
 ###########################################################
 ## ADDING prev DATASET
 ###########################################################
@@ -607,11 +607,6 @@ prev <- read.table("master_spreadsheet_all.csv", header=T, sep=",")
 prev <- subset(prev, prev$Valve =='R') # only keep R valves
 prev <- prev %>% separate(Date, sep="/", into = c('Month', 'Day', 'Year'))
 # dim: 4085, 19
-
-# remove anything that's younger than 2019 
-buoys <- subset(buoys, buoys$Year >='2019') # only keep 2019 onwards
-prev <- inner_join(prev, buoys, by='ID') 
-# dim: 35759450, 34
 
 ### FIGURE OUT DISTRIBUTION OF RESP VARIABLE
 hist(prev$Infested)
@@ -623,15 +618,24 @@ prev$Thick <- as.numeric(prev$Thick)
 prev$x <- as.numeric(prev$x)
 prev$y <- as.numeric(prev$y)
 prev$z <- as.numeric(prev$z)
+prev$Year <- as.numeric(prev$Year)
 
 prev$Lat_sc <- scale(prev$Lat, center = TRUE, scale = TRUE) # scaling lat
 str(prev)
 
+### MERGING DATASETS
+###########################################################
+prev <- merge(prev, buoys_averaged, all.x = TRUE)
+todrop <- which(prev$Year < 2019) 
+prev <- prev[-todrop,]
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
-mod <- glmer(Infested ~ pH_sc + SST_sc + Salinity_sc + Year.y + (1|State/Bay/Farm), family="binomial", data = prev)
+mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + DO_mean + Turbidity_mean + Chlorophyll_mean + (1|Year) + (1|State/Bay/Farm), family="binomial", data = prev)
 summary(mod)
+
+mod2 <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + pH_mean*State + SST_mean*State + Salinity_mean*State + (1|Year) + (1|State/Bay/Farm), family="binomial", data = prev)
+summary(mod2)
 
 # + (1|Lat) when lat is removed the models converge
 
