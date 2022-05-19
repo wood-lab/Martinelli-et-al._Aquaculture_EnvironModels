@@ -584,6 +584,7 @@ mean(buoys.mat$DOsat, na.rm=T) # 80.66294
 mean(buoys.mat$DO, na.rm=T) # 8.828491
 
 buoys <- buoys[, c(1:4,6:11)]
+buoys <- buoys %>% mutate_all(~ifelse(is.nan(.), NA, .))
 
 #### SCALING
 ###########################################################
@@ -594,6 +595,8 @@ buoys$Salinity_sc <- scale(buoys$Salinity, center = TRUE, scale = TRUE)
 buoys$Turbidity_sc <- scale(buoys$Turbidity, center = TRUE, scale = TRUE)
 buoys$Chlorophyll_sc <- scale(buoys$Chlorophyll, center = TRUE, scale = TRUE)
 buoys$pH_sc <- scale(buoys$pH, center = TRUE, scale = TRUE)
+
+buoys <- buoys %>% mutate_all(~ifelse(is.nan(.), NA, .))
 
 buoys_averaged <- buoys %>%
   group_by(ID) %>%
