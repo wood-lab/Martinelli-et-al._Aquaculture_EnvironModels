@@ -20,8 +20,6 @@ library(lubridate)
 data <- read.table("Bellingham buoy/CSVs/Bellingham_buoy.csv", header=T,sep=",")
 colnames(data) <- c('Date','DOsat', 'SST','Salinity','DOconc', 'Turbidity','Chlorophyll')
 data <- mutate(data, Buoy = "Bellingham") # adding col for buoy
-
-# dumping time bc I dont need it
 data$Date <- as.Date(data$Date) 
 
 # splitting into seasons and year
@@ -52,11 +50,9 @@ data$ID <- paste(data$Year, data$Season, data$Buoy)
 carr <- read.table("Carr Inlet/CSVs/Carr.csv", header=T,sep=",")
 colnames(carr) <- c('Date','pH', 'Salinity', 'SST')
 carr <- mutate(carr, Buoy = "Carr Inlet") # adding col for buoy
+carr$Date <- mdy(carr$Date) 
 
-# dumping time bc I dont need it
-carr$Date <- as.Date(carr$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 carr <- as.data.frame(carr)
 yq <- as.yearqtr(as.yearmon(carr$Date, "%m/%d/%Y") + 1/12)
 carr$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -82,11 +78,9 @@ carr$ID <- paste(carr$Year, carr$Season, carr$Buoy)
 cherry <- read.table("cherry point/CSVs/cherry point SST.csv", header=T,sep=",")
 colnames(cherry) <- c('Date','SST')
 cherry <- mutate(cherry, Buoy = "Cherry Point") # adding col for buoy
+cherry$Date <- mdy(cherry$Date) 
 
-# dumping time bc I dont need it
-cherry$Date <- as.Date(cherry$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 cherry <- as.data.frame(cherry)
 yq <- as.yearqtr(as.yearmon(cherry$Date, "%m/%d/%Y") + 1/12)
 cherry$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -111,11 +105,9 @@ cherry$ID <- paste(cherry$Year, cherry$Season, cherry$Buoy)
 hoodsport <- read.table("Hoodsport/CSVs/Hoodsport.csv", header=T, sep=",")
 colnames(hoodsport) <- c('Date','SST', 'Salinity', 'pH')
 hoodsport <- mutate(hoodsport, Buoy = "Hoodsport") # adding col for buoy
+hoodsport$Date <- mdy(hoodsport$Date) 
 
-# dumping time bc I dont need it
-hoodsport$Date <- as.Date(hoodsport$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 hoodsport <- as.data.frame(hoodsport)
 yq <- as.yearqtr(as.yearmon(hoodsport$Date, "%m/%d/%Y") + 1/12)
 hoodsport$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -140,9 +132,7 @@ hoodsport$ID <- paste(hoodsport$Year, hoodsport$Season, hoodsport$Buoy)
 ptownsend <- read.table("port townsend/CSVs/PortTownsend.csv", header=T,sep=",")
 colnames(ptownsend) <- c('Date','SST')
 ptownsend <- mutate(ptownsend, Buoy = "Port Townsend") # adding col for buoy
-
-# dumping time bc I dont need it
-ptownsend$Date <- as.Date(ptownsend$Date) 
+ptownsend$Date <- mdy(ptownsend$Date) 
 
 # splitting into seasons and year ## FIX
 ptownsend <- as.data.frame(ptownsend)
@@ -169,11 +159,9 @@ ptownsend$ID <- paste(ptownsend$Year, ptownsend$Season, ptownsend$Buoy)
 tokeland <- read.table("tokeland/CSVs/Tokeland.csv", header=T, sep=",")
 colnames(tokeland) <- c('Date','SST', 'Salinity', 'DO', 'pH')
 tokeland <- mutate(tokeland, Buoy = "Tokeland") # adding col for buoy
+tokeland$Date <- mdy(tokeland$Date) 
 
-# dumping time bc I dont need it
-tokeland$Date <- as.Date(tokeland$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 tokeland <- as.data.frame(tokeland)
 yq <- as.yearqtr(as.yearmon(tokeland$Date, "%m/%d/%Y") + 1/12)
 tokeland$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -198,11 +186,9 @@ tokeland$ID <- paste(tokeland$Year, tokeland$Season, tokeland$Buoy)
 bayview <- read.table("Bayview channel/CSVs/Bay view channel.csv", header=T, sep=",")
 colnames(bayview) <- c('Date','SST', 'Salinity', 'DO', 'depth','pH')
 bayview <- mutate(bayview, Buoy = "Bayview") # adding col for buoy
+bayview$Date <- mdy(bayview$Date) 
 
-# dumping time bc I dont need it
-bayview$Date <- as.Date(bayview$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year 
 bayview <- as.data.frame(bayview)
 yq <- as.yearqtr(as.yearmon(bayview$Date, "%m/%d/%Y") + 1/12)
 bayview$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -225,11 +211,9 @@ bayview <- bayview[-todrop,]
 coos <- read.table("Coos Bay buoy/CSVs/Coos Bay buoy.csv", header=T, sep=",")
 colnames(coos) <- c('Date','SST', 'Salinity', 'DO', 'depth','pH', 'Turbidity')
 coos <- mutate(coos, Buoy = "Coos") # adding col for buoy
+coos$Date <- mdy(coos$Date) 
 
-# dumping time bc I dont need it
-coos$Date <- as.Date(coos$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 coos <- as.data.frame(coos)
 yq <- as.yearqtr(as.yearmon(coos$Date, "%m/%d/%Y") + 1/12)
 coos$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -258,8 +242,6 @@ env.files # check the list of files is okay
 bodega <- ldply(env.files, read_csv) # read all the files 
 colnames(bodega) <- c('Date','Salinity','SST')
 bodega <- mutate(bodega, Buoy = "Bodega") # adding col for buoy
-
-# dumping time bc I dont need it
 bodega$Date <- as.Date(bodega$Date) 
 
 # splitting into seasons and year ## FIX
@@ -288,11 +270,9 @@ bodega <- bodega[-todrop,]
 ###########################################################
 yaquina <- read.table("yaquina/CSVs/yaquina SST.csv", header=T, sep=",")
 yaquina <- mutate(yaquina, Buoy = "Yaquina") # adding col for buoy
+yaquina$Date <- mdy(yaquina$Date) 
 
-# dumping time bc I dont need it
-yaquina$Date <- as.Date(yaquina$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 yaquina <- as.data.frame(yaquina)
 yq <- as.yearqtr(as.yearmon(yaquina$Date, "%m/%d/%Y") + 1/12)
 yaquina$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -339,9 +319,7 @@ netarts$ID <- paste(netarts$Year, netarts$Season, netarts$Buoy)
 ketchikan <- read.table("Ketchikan/CSVs/ketchikan temp.csv", header=T, sep=",")
 colnames(ketchikan) <- c('Date','SST')
 ketchikan <- mutate(ketchikan, Buoy = "Ketchikan") # adding col for buoy
-
-# dumping time bc I dont need it
-ketchikan$Date <- as.Date(ketchikan$Date) 
+ketchikan$Date <- as.Date(ketchikan$Date) # dumping time bc I dont need it
 
 # splitting into seasons and year ## FIX
 ketchikan <- as.data.frame(ketchikan)
@@ -367,11 +345,9 @@ ketchikan$ID <- paste(ketchikan$Year, ketchikan$Season, ketchikan$Buoy)
 ###########################################################
 tillamook <- read.table("tillamook/CSVs/tillamook SST.csv", header=T, sep=",")
 tillamook <- mutate(tillamook, Buoy = "Tillamook") # adding col for buoy
+tillamook$Date <- mdy(tillamook$Date) 
 
-# dumping time bc I dont need it
-tillamook$Date <- as.Date(tillamook$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 tillamook <- as.data.frame(tillamook)
 yq <- as.yearqtr(as.yearmon(tillamook$Date, "%m/%d/%Y") + 1/12)
 tillamook$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -584,23 +560,16 @@ mean(buoys.mat$DOsat, na.rm=T) # 80.66294
 mean(buoys.mat$DO, na.rm=T) # 8.828491
 
 buoys <- buoys[, c(1:4,6:11)]
-buoys <- buoys %>% mutate_all(~ifelse(is.nan(.), NA, .))
+#buoys <- buoys %>% mutate_all(~ifelse(is.nan(.), NA, .))
 
 #### SCALING
 ###########################################################
 # scale(x, center = TRUE, scale = TRUE)
-buoys$DO_sc <- scale(buoys$DOsat, center = TRUE, scale = TRUE)
-buoys$SST_sc <- scale(buoys$SST, center = TRUE, scale = TRUE)
-buoys$Salinity_sc <- scale(buoys$Salinity, center = TRUE, scale = TRUE)
-buoys$Turbidity_sc <- scale(buoys$Turbidity, center = TRUE, scale = TRUE)
-buoys$Chlorophyll_sc <- scale(buoys$Chlorophyll, center = TRUE, scale = TRUE)
-buoys$pH_sc <- scale(buoys$pH, center = TRUE, scale = TRUE)
-
-buoys <- buoys %>% mutate_all(~ifelse(is.nan(.), NA, .))
+#buoys <- buoys %>% mutate_all(~ifelse(is.nan(.), NA, .))
 
 buoys_averaged <- buoys %>%
   group_by(ID) %>%
-  summarize_at(vars(SST,Salinity,DOsat,Turbidity,Chlorophyll,pH),funs(mean = mean(.,na.rm=TRUE)))
+  summarize_at(vars(SST,Salinity,DOsat,Turbidity,Chlorophyll,pH),funs(mean = mean))
 
 ###########################################################
 ## ADDING prev DATASET
@@ -629,13 +598,10 @@ str(prev)
 ### MERGING DATASETS
 ###########################################################
 fulldata <- merge(prev, buoys_averaged, merge.by=ID, all.x = TRUE)
-# todrop <- which(fulldata$Year < 2019) 
-# fulldata <- fulldata[-todrop,]
-
 
 summarytab <- fulldata %>%
   group_by(Year, Bay, Farm) %>%
-  summarize_at(vars(SST_mean,Salinity_mean,DOsat_mean,Turbidity_mean,Chlorophyll_mean,pH_mean),funs(mean = mean(.,na.rm=TRUE)))
+  summarize_at(vars(SST_mean,Salinity_mean,DOsat_mean,Turbidity_mean,Chlorophyll_mean,pH_mean),funs(mean = mean))
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
@@ -643,7 +609,9 @@ mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|State/Bay/Farm),
 summary(mod)
 anova(mod)
 vif(mod)
+
 # + DOsat_mean + Turbidity_mean + Chlorophyll_mean
+# Farm:(Bay:State)
 
 mod2 <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + pH_mean*State + SST_mean*State + Salinity_mean*State + (1|Year) + (1|State/Bay/Farm), family="binomial", data = prev)
 summary(mod2)
