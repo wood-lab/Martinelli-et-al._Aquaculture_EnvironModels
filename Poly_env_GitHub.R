@@ -10,6 +10,7 @@ library(zoo)
 library(corrplot) 
 library(lme4) 
 library(lubridate)
+library(car)
 
 # info from buoys loaded separately,then, all these files will be joined 
 # with the prev dataset that will be uploaded last
@@ -377,9 +378,7 @@ tom <- ldply(env.files, read_csv) # read all the files
 tom <- tom[,(-3)]
 colnames(tom) <- c('Date','Chlorophyll', 'pH', 'Salinity', 'SST')
 tom <- mutate(tom, Buoy = "Tomales") # adding col for buoy
-
-# dumping time bc I dont need it
-tom$Date <- as.Date(tom$Date) 
+tom$Date <- as.Date(tom$Date) # dumping time bc I dont need it
 
 # splitting into seasons and year
 tom <- as.data.frame(tom)
@@ -427,7 +426,7 @@ humboldt$ID <- paste(humboldt$Year, humboldt$Season, humboldt$Buoy)
 todrop <- which(humboldt$pH < 7) 
 humboldt <- humboldt[-todrop,]
 
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 humboldt <- as.data.frame(humboldt)
 yq <- as.yearqtr(as.yearmon(humboldt$Date, "%m/%d/%Y") + 1/12)
 humboldt$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -451,11 +450,9 @@ humboldt <- humboldt %>% separate(Date, sep="-", into = c("Year"))
 homer <- read.table("Homer surface/CSVs/Homer surface.csv", header=T, sep=",")
 colnames(homer) <- c('Date','SST','Salinity','DO','Depth','pH', 'Turbidity')
 homer <- mutate(homer, Buoy = "Homer") # adding col for buoy
+homer$Date <- mdy(homer$Date) 
 
-# dumping time bc I dont need it
-homer$Date <- as.Date(homer$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year 
 homer <- as.data.frame(homer)
 yq <- as.yearqtr(as.yearmon(homer$Date, "%Y/%m/%d") + 1/12)
 homer$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -480,11 +477,9 @@ homer$ID <- paste(homer$Year, homer$Season, homer$Buoy)
 portalex <- read.table("port alexander/CSVs/PtAlexander_SST.csv", header=T, sep=",")
 colnames(portalex) <- c('Date','SST')
 portalex <- mutate(portalex, Buoy = "P Alexander") # adding col for buoy
+portalex$Date <- as.Date(portalex$Date) # dumping time bc I dont need it
 
-# dumping time bc I dont need it
-portalex$Date <- as.Date(portalex$Date) 
-
-# splitting into seasons and year ## FIX
+# splitting into seasons and year
 portalex <- as.data.frame(portalex)
 yq <- as.yearqtr(as.yearmon(portalex$Date, "%m/%d/%Y") + 1/12)
 portalex$Season <- factor(format(yq, "%q"), levels = 1:4, 
@@ -560,13 +555,9 @@ mean(buoys.mat$DOsat, na.rm=T) # 80.66294
 mean(buoys.mat$DO, na.rm=T) # 8.828491
 
 buoys <- buoys[, c(1:4,6:11)]
-#buoys <- buoys %>% mutate_all(~ifelse(is.nan(.), NA, .))
 
-#### SCALING
+#### CREATING TIBBLE W/AVERAGES PER YEAR
 ###########################################################
-# scale(x, center = TRUE, scale = TRUE)
-#buoys <- buoys %>% mutate_all(~ifelse(is.nan(.), NA, .))
-
 buoys_averaged <- buoys %>%
   group_by(ID) %>%
   summarize_at(vars(SST,Salinity,DOsat,Turbidity,Chlorophyll,pH),funs(mean = mean))
@@ -605,46 +596,35 @@ summarytab <- fulldata %>%
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
-mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|State/Bay/Farm), family="binomial", data = fulldata)
+mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean  + (1|Year) + (1|State/Bay/Farm), family="binomial", data = fulldata)
 summary(mod)
 anova(mod)
 vif(mod)
-
 # + DOsat_mean + Turbidity_mean + Chlorophyll_mean
-# Farm:(Bay:State)
 
-mod2 <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + pH_mean*State + SST_mean*State + Salinity_mean*State + (1|Year) + (1|State/Bay/Farm), family="binomial", data = prev)
+mod2 <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + pH_mean*State + Salinity_mean*State + (1|Year) + (1|State/Bay/Farm), family="binomial", data = fulldata)
 summary(mod2)
-
-# + (1|Lat) when lat is removed the models converge
-
-
-
-
-
-
-
 
 
 ### MODEL TESTING FOR each STATE
 ###########################################################
-waprev <- subset(prev, prev$State =='WA')
-modwa <- glmer(Infested ~ pH_sc + SST_sc + Salinity_sc + Year.y + (1|Bay/Farm), family="binomial", data = waprev)
+wafulldata <- subset(fulldata, fulldata$State =='WA')
+modwa <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay/Farm), family="binomial", data = wafulldata)
 summary(modwa)
 
 ###########################################################
-akprev <- subset(prev, prev$State =='AK')
-modak <- glmer(Infested ~ pH_sc + SST_sc + Salinity_sc + Year.y + (1|Bay/Farm), family="binomial", data = akprev)
+akfulldata <- subset(fulldata, fulldata$State =='AK')
+modak <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay/Farm), family="binomial", data = akfulldata)
 summary(modak)
 
 ###########################################################
-orprev <- subset(prev, prev$State =='OR')
-modor <- glmer(Infested ~ pH_sc + SST_sc + Salinity_sc + Year.y + (1|Bay/Farm), family="binomial", data = orprev)
+orfulldata <- subset(fulldata, fulldata$State =='OR')
+modor <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay/Farm), family="binomial", data = orfulldata)
 summary(modor)
 
 ###########################################################
-caprev <- subset(prev, prev$State =='CA')
-modca <- glmer(Infested ~ pH_sc + SST_sc + Salinity_sc + Year.y + (1|Bay/Farm), family="binomial", data = caprev)
+cafulldata <- subset(fulldata, fulldata$State =='CA')
+modca <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + Year + (1|Bay/Farm), family="binomial", data = cafulldata)
 summary(modca)
 
 
