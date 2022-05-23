@@ -596,13 +596,13 @@ summarytab <- fulldata %>%
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
-mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean  + (1|Year) + (1|State/Bay/Farm), family="binomial", data = fulldata)
+mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|State/Bay/Farm), family="binomial", data = fulldata)
 summary(mod)
 anova(mod)
 vif(mod)
 # + DOsat_mean + Turbidity_mean + Chlorophyll_mean
 
-mod2 <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + pH_mean*State + Salinity_mean*State + (1|Year) + (1|State/Bay/Farm), family="binomial", data = fulldata)
+mod2 <- glmer(Infested ~ pH_mean + Salinity_mean + pH_mean*State + Salinity_mean*State + (1|Year) + (1|State/Bay/Farm), family="binomial", data = fulldata)
 summary(mod2)
 
 
@@ -619,12 +619,12 @@ summary(modak)
 
 ###########################################################
 orfulldata <- subset(fulldata, fulldata$State =='OR')
-modor <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay/Farm), family="binomial", data = orfulldata)
+modor <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay), family="binomial", data = orfulldata)
 summary(modor)
 
 ###########################################################
 cafulldata <- subset(fulldata, fulldata$State =='CA')
-modca <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + Year + (1|Bay/Farm), family="binomial", data = cafulldata)
+modca <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay), family="binomial", data = cafulldata)
 summary(modca)
 
 
