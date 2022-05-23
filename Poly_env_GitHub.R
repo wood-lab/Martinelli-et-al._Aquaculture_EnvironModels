@@ -418,20 +418,19 @@ humboldt <- mutate(humboldt, Buoy = "Humboldt") # adding col for buoy
 
 # dumping time bc I dont need it
 humboldt$Date <- as.Date(humboldt$Date) 
+
+# splitting into seasons and year
+yq <- as.yearqtr(as.yearmon(humboldt$Date, "%m/%d/%Y") + 1/12)
+humboldt$Season <- factor(format(yq, "%q"), levels = 1:4, 
+                     labels = c("Winter", "Spring", "Summer", "Fall"))
+humboldt <- humboldt %>% separate(Date, sep="-", into = c("Year"))
+
 todrop <- which(humboldt$SST >50) 
 humboldt <- humboldt[-todrop,]
-
-humboldt$ID <- paste(humboldt$Year, humboldt$Season, humboldt$Buoy)
-
 todrop <- which(humboldt$pH < 7) 
 humboldt <- humboldt[-todrop,]
 
-# splitting into seasons and year
-humboldt <- as.data.frame(humboldt)
-yq <- as.yearqtr(as.yearmon(humboldt$Date, "%m/%d/%Y") + 1/12)
-humboldt$Season <- factor(format(yq, "%q"), levels = 1:4, 
-                          labels = c("Winter", "Spring", "Summer", "Fall"))
-humboldt <- humboldt %>% separate(Date, sep="-", into = c("Year"))
+humboldt$ID <- paste(humboldt$Year, humboldt$Season, humboldt$Buoy)
 
 # creating summary table 
 # humboldt.summ <- humboldt %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
@@ -474,18 +473,6 @@ homer$ID <- paste(homer$Year, homer$Season, homer$Buoy)
 ###########################################################
 ### PT ALEXANDER BUOY
 ###########################################################
-portalex <- read.table("port alexander/CSVs/PtAlexander_SST.csv", header=T, sep=",")
-colnames(portalex) <- c('Date','SST')
-portalex <- mutate(portalex, Buoy = "P Alexander") # adding col for buoy
-portalex$Date <- as.Date(portalex$Date) # dumping time bc I dont need it
-
-# splitting into seasons and year
-portalex <- as.data.frame(portalex)
-yq <- as.yearqtr(as.yearmon(portalex$Date, "%m/%d/%Y") + 1/12)
-portalex$Season <- factor(format(yq, "%q"), levels = 1:4, 
-                          labels = c("Winter", "Spring", "Summer", "Fall"))
-portalex <- portalex %>% separate(Date, sep="-", into = c("Year"))
-portalex$ID <- paste(portalex$Year, portalex$Season, portalex$Buoy)
 
 # creating summary table 
 # portalex.summ <- portalex %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
@@ -572,11 +559,9 @@ prev <- subset(prev, prev$Valve =='R') # only keep R valves
 prev <- prev %>% mutate(Date1 = Date)
 prev$Date1 <- mdy(prev$Date1)
 prev <- prev %>% separate(Date1, sep="-", into = c('Year', 'Month', 'Day'))
-prev$Date <- dmy(prev$Date)
+prev$Date <- mdy(prev$Date)
 prev$Year <- as.numeric(prev$Year)
 prev$Year_sc <- scale(prev$Year, center = TRUE, scale = TRUE) # scaling 
-
-# dim: 4085, 21
 
 prev$Shell_g <- as.numeric(prev$Shell_g)     
 prev$Tissue_g <- as.numeric(prev$Tissue_g)
@@ -591,7 +576,6 @@ str(prev)
 ### MERGING DATASETS
 ###########################################################
 fulldata <- merge(prev, buoys_averaged, merge.by=ID, all.x = TRUE)
-
 
 summarytab <- fulldata %>%
   group_by(Year, Bay, Farm) %>%
@@ -612,7 +596,7 @@ anova(mod)
 vif(mod)
 # + DOsat_mean_sc + Turbidity_mean_sc + Chlorophyll_mean_sc
 
-mod2 <- glmer(Infested ~ pH_mean_sc*State + SST_mean_sc*State + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
+mod2 <- glmer(Infested ~ pH_mean_sc*State + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
 summary(mod2)
 
 
