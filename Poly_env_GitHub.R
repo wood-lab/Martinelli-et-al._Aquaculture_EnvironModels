@@ -570,10 +570,12 @@ prev <- read.table("master_spreadsheet_all.csv", header=T, sep=",")
 prev <- subset(prev, prev$Valve =='R') # only keep R valves
 # splitting and creating dates
 prev <- prev %>% mutate(Date1 = Date)
-prev$Date1 <- dmy(prev$Date1)
-prev <- prev %>% separate(Date1, sep="-", into = c('Year', 'Day', 'Month'))
+prev$Date1 <- mdy(prev$Date1)
+prev <- prev %>% separate(Date1, sep="-", into = c('Year', 'Month', 'Day'))
 prev$Date <- dmy(prev$Date)
 prev$Year <- as.numeric(prev$Year)
+prev$Year_sc <- scale(prev$Year, center = TRUE, scale = TRUE) # scaling 
+
 # dim: 4085, 21
 
 prev$Shell_g <- as.numeric(prev$Shell_g)     
@@ -590,41 +592,49 @@ str(prev)
 ###########################################################
 fulldata <- merge(prev, buoys_averaged, merge.by=ID, all.x = TRUE)
 
+
 summarytab <- fulldata %>%
   group_by(Year, Bay, Farm) %>%
   summarize_at(vars(SST_mean,Salinity_mean,DOsat_mean,Turbidity_mean,Chlorophyll_mean,pH_mean),funs(mean = mean))
 
+fulldata$Salinity_mean_sc <- scale(fulldata$Salinity_mean, center = TRUE, scale = TRUE) # scaling lat
+fulldata$SST_mean_sc <- scale(fulldata$SST_mean, center = TRUE, scale = TRUE) # scaling lat
+fulldata$pH_mean_sc <- scale(fulldata$pH_mean, center = TRUE, scale = TRUE) # scaling lat
+fulldata$DOsat_mean_sc <- scale(fulldata$DOsat_mean, center = TRUE, scale = TRUE) # scaling lat
+fulldata$Turbidity_mean_sc <- scale(fulldata$Turbidity_mean, center = TRUE, scale = TRUE) # scaling lat
+fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, scale = TRUE) # scaling lat
+
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
-mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|State/Bay/Farm), family="binomial", data = fulldata)
+mod <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
 summary(mod)
 anova(mod)
 vif(mod)
-# + DOsat_mean + Turbidity_mean + Chlorophyll_mean
+# + DOsat_mean_sc + Turbidity_mean_sc + Chlorophyll_mean_sc
 
-mod2 <- glmer(Infested ~ pH_mean + Salinity_mean + pH_mean*State + Salinity_mean*State + (1|Year) + (1|State/Bay/Farm), family="binomial", data = fulldata)
+mod2 <- glmer(Infested ~ pH_mean_sc*State + SST_mean_sc*State + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
 summary(mod2)
 
 
 ### MODEL TESTING FOR each STATE
 ###########################################################
 wafulldata <- subset(fulldata, fulldata$State =='WA')
-modwa <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay/Farm), family="binomial", data = wafulldata)
+modwa <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay/Farm), family="binomial", data = wafulldata)
 summary(modwa)
 
 ###########################################################
 akfulldata <- subset(fulldata, fulldata$State =='AK')
-modak <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay/Farm), family="binomial", data = akfulldata)
+modak <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay/Farm), family="binomial", data = akfulldata)
 summary(modak)
 
 ###########################################################
 orfulldata <- subset(fulldata, fulldata$State =='OR')
-modor <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay), family="binomial", data = orfulldata)
+modor <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay), family="binomial", data = orfulldata)
 summary(modor)
 
 ###########################################################
 cafulldata <- subset(fulldata, fulldata$State =='CA')
-modca <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Bay), family="binomial", data = cafulldata)
+modca <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay), family="binomial", data = cafulldata)
 summary(modca)
 
 
