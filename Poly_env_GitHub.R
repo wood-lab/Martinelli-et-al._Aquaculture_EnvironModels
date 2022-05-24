@@ -473,6 +473,18 @@ homer$ID <- paste(homer$Year, homer$Season, homer$Buoy)
 ###########################################################
 ### PT ALEXANDER BUOY
 ###########################################################
+portalex <- read.table("port alexander/CSVs/PtAlexander_SST.csv", header=T, sep=",")
+colnames(portalex) <- c('Date','SST')
+portalex <- mutate(portalex, Buoy = "P Alexander") # adding col for buoy
+portalex$Date <- as.Date(portalex$Date) # dumping time bc I dont need it
+
+# splitting into seasons and year
+portalex <- as.data.frame(portalex)
+yq <- as.yearqtr(as.yearmon(portalex$Date, "%m/%d/%Y") + 1/12)
+portalex$Season <- factor(format(yq, "%q"), levels = 1:4, 
+                          labels = c("Winter", "Spring", "Summer", "Fall"))
+portalex <- portalex %>% separate(Date, sep="-", into = c("Year"))
+portalex$ID <- paste(portalex$Year, portalex$Season, portalex$Buoy)
 
 # creating summary table 
 # portalex.summ <- portalex %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
@@ -578,8 +590,8 @@ str(prev)
 fulldata <- merge(prev, buoys_averaged, merge.by=ID, all.x = TRUE)
 
 summarytab <- fulldata %>%
-  group_by(Year, Bay, Farm) %>%
-  summarize_at(vars(SST_mean,Salinity_mean,DOsat_mean,Turbidity_mean,Chlorophyll_mean,pH_mean),funs(mean = mean))
+  group_by(ID) %>%
+  summarize_at(vars(SST_mean,Salinity_mean,pH_mean),funs(mean = mean))
 
 fulldata$Salinity_mean_sc <- scale(fulldata$Salinity_mean, center = TRUE, scale = TRUE) # scaling lat
 fulldata$SST_mean_sc <- scale(fulldata$SST_mean, center = TRUE, scale = TRUE) # scaling lat
