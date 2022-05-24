@@ -618,17 +618,18 @@ wafulldata <- subset(fulldata, fulldata$State =='WA')
 modwa <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay/Farm), family="binomial", data = wafulldata)
 summary(modwa)
 
-###########################################################
+########################################################### NOT WORKING
+# TRIED REMOVING ONE BY ONE, EXCEPT YEAR. ALSO TRIED REMOVING BAY. NO OPTION WORKS
 akfulldata <- subset(fulldata, fulldata$State =='AK')
-modak <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay/Farm), family="binomial", data = akfulldata)
+modak <- glmer(Infested ~  pH_mean_sc + SST_mean_sc +  Salinity_mean_sc + (1|Year_sc) + (1|Bay/Farm), family="binomial", data = akfulldata)
 summary(modak)
 
-###########################################################
+########################################################### NOT WORKING
 orfulldata <- subset(fulldata, fulldata$State =='OR')
-modor <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay), family="binomial", data = orfulldata)
+modor <- glmer(Infested ~  pH_mean_sc +  SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay), family="binomial", data = orfulldata)
 summary(modor)
 
-###########################################################
+########################################################### NOT WORKING
 cafulldata <- subset(fulldata, fulldata$State =='CA')
 modca <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|Bay), family="binomial", data = cafulldata)
 summary(modca)
