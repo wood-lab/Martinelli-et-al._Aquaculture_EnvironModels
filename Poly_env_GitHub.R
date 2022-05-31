@@ -558,8 +558,15 @@ buoys <- buoys[, c(1:4,6:11)]
 #### CREATING TIBBLE W/AVERAGES PER YEAR
 ###########################################################
 buoys_averaged <- buoys %>%
-  group_by(ID) %>%
+  group_by(ID,Year,Buoy, Season) %>%
   summarize_at(vars(SST,Salinity,DOsat,Turbidity,Chlorophyll,pH),funs(mean = mean))
+
+# here, to get the summary for the 2 years prior I'd have to subset
+# only 2017 & 2018 and then merge it to the full dataset to have the
+# prior env included - did not work! Will see about manually doing this
+
+buoys_subset <- subset(buoys_averaged, buoys_averaged$Year == "2017" | buoys_averaged$Year== "2018")
+write.csv(buoys_subset,"Desktop\\buoys_subset.csv", row.names = FALSE)
 
 ###########################################################
 ## ADDING prev DATASET
@@ -599,6 +606,8 @@ fulldata$pH_mean_sc <- scale(fulldata$pH_mean, center = TRUE, scale = TRUE) # sc
 fulldata$DOsat_mean_sc <- scale(fulldata$DOsat_mean, center = TRUE, scale = TRUE) # scaling lat
 fulldata$Turbidity_mean_sc <- scale(fulldata$Turbidity_mean, center = TRUE, scale = TRUE) # scaling lat
 fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, scale = TRUE) # scaling lat
+
+write.csv(fulldata,"Desktop\\fulldata.csv", row.names = FALSE)
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
