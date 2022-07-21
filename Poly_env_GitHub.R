@@ -558,8 +558,8 @@ buoys <- buoys[, c(1:4,6:11)]
 #### CREATING TIBBLE W/AVERAGES PER YEAR
 ###########################################################
 buoys_averaged <- buoys %>%
-  group_by(ID,Year,Buoy, Season) %>%
-  summarize_at(vars(SST,Salinity,DOsat,Turbidity,Chlorophyll,pH),funs(mean = mean))
+  group_by(Year,Buoy) %>% #ID,Season
+  summarize_at(vars(SST,Salinity,pH),funs(mean = mean))
 
 # here, to get the summary for the 2 years prior I'd have to subset
 # only 2017 & 2018 and then merge it to the full dataset to have the
