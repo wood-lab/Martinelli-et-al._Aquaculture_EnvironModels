@@ -598,7 +598,7 @@ fulldata <- merge(prev, buoys_averaged, merge.by=ID, all.x = TRUE)
 
 summarytab <- fulldata %>%
   group_by(ID) %>%
-  summarize_at(vars(SST_mean,Salinity_mean,pH_mean),funs(mean = mean))
+  summarize_at(vars(SST_mean,Salinity_mean,pH_mean),list(mean = mean))
 
 fulldata$Salinity_mean_sc <- scale(fulldata$Salinity_mean, center = TRUE, scale = TRUE) # scaling lat
 fulldata$SST_mean_sc <- scale(fulldata$SST_mean, center = TRUE, scale = TRUE) # scaling lat
@@ -607,7 +607,7 @@ fulldata$DOsat_mean_sc <- scale(fulldata$DOsat_mean, center = TRUE, scale = TRUE
 fulldata$Turbidity_mean_sc <- scale(fulldata$Turbidity_mean, center = TRUE, scale = TRUE) # scaling lat
 fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, scale = TRUE) # scaling lat
 
-write.csv(fulldata,"Desktop\\fulldata.csv", row.names = FALSE)
+#write.csv(fulldata,"Desktop\\fulldata.csv", row.names = FALSE)
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
@@ -617,7 +617,7 @@ write.csv(fulldata,"Desktop\\fulldata.csv", row.names = FALSE)
 # adding 6 new cols
 
 ### MERGING DATASETS
-buoys_averaged <- read.table("buoys_averaged.csv", header=T, sep=",")
+buoys_prior <- read.table("buoys_prior.csv", header=T, sep=",")
 fulldata2 <- merge(fulldata, buoys_averaged, merge.by= Buoy, all.x = TRUE)
 
 ### MODEL TESTING FOR ALL STATES
