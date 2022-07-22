@@ -559,14 +559,14 @@ buoys <- buoys[, c(1:4,6:11)]
 ###########################################################
 buoys_averaged <- buoys %>%
   group_by(Year,Buoy) %>% #ID,Season
-  summarize_at(vars(SST,Salinity,pH),funs(mean = mean))
+  summarize_at(vars(SST,Salinity,pH), list(mean = mean))
 
 # here, to get the summary for the 2 years prior I'd have to subset
 # only 2017 & 2018 and then merge it to the full dataset to have the
 # prior env included - did not work! Will see about manually doing this
 
-buoys_subset <- subset(buoys_averaged, buoys_averaged$Year == "2017" | buoys_averaged$Year== "2018")
-write.csv(buoys_subset,"Desktop\\buoys_subset.csv", row.names = FALSE)
+#buoys_subset <- subset(buoys_averaged, buoys_averaged$Year == "2017" | buoys_averaged$Year== "2018")
+write.csv(buoys_averaged,"buoys_averaged.csv", row.names = FALSE)
 
 ###########################################################
 ## ADDING prev DATASET
@@ -608,6 +608,17 @@ fulldata$Turbidity_mean_sc <- scale(fulldata$Turbidity_mean, center = TRUE, scal
 fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, scale = TRUE) # scaling lat
 
 write.csv(fulldata,"Desktop\\fulldata.csv", row.names = FALSE)
+
+### MODEL TESTING FOR ALL STATES
+###########################################################
+# in line 558 I summarized the env data we used for years 2017 and 2018
+# that was summarized in a csv called "buoys_averaged"
+# now I'm going to merge that csv with "fulldata", merging by buoys and 
+# adding 6 new cols
+
+### MERGING DATASETS
+buoys_averaged <- read.table("buoys_averaged.csv", header=T, sep=",")
+fulldata2 <- merge(fulldata, buoys_averaged, merge.by= Buoy, all.x = TRUE)
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
