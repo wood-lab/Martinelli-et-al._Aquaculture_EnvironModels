@@ -617,7 +617,7 @@ fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, 
 # adding 6 new cols
 
 ### MERGING DATASETS
-buoys_prior <- read.table("buoys_prior.csv", header=T, sep=",")
+buoys_prior <- read.csv("buoys_prior.csv", header=T, sep=",")
 fulldata2 <- merge(fulldata, buoys_averaged, merge.by= Buoy, all.x = TRUE)
 
 ### MODEL TESTING FOR ALL STATES
