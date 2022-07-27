@@ -558,7 +558,7 @@ buoys <- buoys[, c(1:4,6:11)]
 #### CREATING TIBBLE W/AVERAGES PER YEAR
 ###########################################################
 buoys_averaged <- buoys %>%
-  group_by(Year,Buoy) %>% #ID,Season
+  group_by(Year,Buoy,ID,Season) %>% #
   summarize_at(vars(SST,Salinity,pH), list(mean = mean))
 
 # here, to get the summary for the 2 years prior I'd have to subset
@@ -595,7 +595,6 @@ str(prev)
 ### MERGING DATASETS
 ###########################################################
 fulldata <- merge(prev, buoys_averaged, merge.by=ID, all.x = TRUE)
-
 summarytab <- fulldata %>%
   group_by(ID) %>%
   summarize_at(vars(SST_mean,Salinity_mean,pH_mean),list(mean = mean))
@@ -618,7 +617,7 @@ fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, 
 
 ### MERGING DATASETS
 buoys_prior <- read.csv("buoys_prior.csv", header=T, sep=",")
-fulldata2 <- merge(fulldata, buoys_averaged, merge.by= Buoy, all.x = TRUE)
+fulldata2 <- merge(fulldata, buoys_prior, merge.by= Buoy, all.x = TRUE)
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
@@ -631,6 +630,15 @@ vif(mod)
 mod2 <- glmer(Infested ~ pH_mean_sc*State + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
 summary(mod2)
 
+mod3 <- glmer(Infested ~ pH_mean_2017 + SST_mean_2017 + Salinity_mean_2017 + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata2)
+summary(mod3)
+anova(mod3)
+vif(mod3)
+
+mod4 <- glmer(Infested ~ pH_mean_2018 + SST_mean_2018 + Salinity_mean_2018 + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata2)
+summary(mod4)
+anova(mod4)
+vif(mod4)
 
 ### MODEL TESTING FOR each STATE
 ###########################################################
