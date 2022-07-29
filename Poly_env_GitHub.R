@@ -619,6 +619,21 @@ fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, 
 buoys_prior <- read.csv("buoys_prior.csv", header=T, sep=",")
 fulldata2 <- merge(fulldata, buoys_prior, merge.by= Buoy, all.x = TRUE)
 
+### SUBSETTING DATASET TO INCLUDE ONLY BUOYS WITH 2017-18 DATA
+# these buoys are: Bayview, Bellingham, Bodega, Carr Inlet, Coos, Homer
+
+dataprior <- subset(fulldata2, fulldata2$Buoy =='Bayview'|fulldata2$Buoy =='Bellingham'|
+                    fulldata2$Buoy =='Bodega'|fulldata2$Buoy =='Carr Inlet'|
+                    fulldata2$Buoy =='Coos'|fulldata2$Buoy =='Homer') 
+
+# scaling data prior
+dataprior$Salinity_mean_2017_sc <- scale(dataprior$Salinity_mean_2017, center = TRUE, scale = TRUE) # scaling lat
+dataprior$Salinity_mean_2018_sc <- scale(dataprior$Salinity_mean_2018, center = TRUE, scale = TRUE) # scaling lat
+dataprior$SST_mean_2017_sc <- scale(dataprior$SST_mean_2017, center = TRUE, scale = TRUE) # scaling lat
+dataprior$SST_mean_2018_sc <- scale(dataprior$SST_mean_2018, center = TRUE, scale = TRUE) # scaling lat
+dataprior$pH_mean_2017_sc <- scale(dataprior$pH_mean_2017, center = TRUE, scale = TRUE) # scaling lat
+dataprior$pH_mean_2018_sc <- scale(dataprior$pH_mean_2018, center = TRUE, scale = TRUE) # scaling lat
+
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
 mod <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
@@ -630,12 +645,13 @@ vif(mod)
 mod2 <- glmer(Infested ~ pH_mean_sc*State + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
 summary(mod2)
 
-mod3 <- glmer(Infested ~ pH_mean_2017 + SST_mean_2017 + Salinity_mean_2017 + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata2)
+## for the next models I'll use only the subset  for the buoys with 2017-18 data
+mod3 <- glmer(Infested ~ pH_mean_2017_sc + SST_mean_2017_sc + Salinity_mean_2017_sc + (1|Year_sc) + (1|State/Farm), family="binomial", data = dataprior)
 summary(mod3)
 anova(mod3)
 vif(mod3)
 
-mod4 <- glmer(Infested ~ pH_mean_2018 + SST_mean_2018 + Salinity_mean_2018 + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata2)
+mod4 <- glmer(Infested ~ pH_mean_2018 + SST_mean_2018 + Salinity_mean_2018 + (1|Year_sc) + (1|State/Farm), family="binomial", data = dataprior)
 summary(mod4)
 anova(mod4)
 vif(mod4)
