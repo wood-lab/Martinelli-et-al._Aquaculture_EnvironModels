@@ -622,9 +622,9 @@ fulldata2 <- merge(fulldata, buoys_prior, merge.by= Buoy, all.x = TRUE)
 ### SUBSETTING DATASET TO INCLUDE ONLY BUOYS WITH 2017-18 DATA
 # these buoys are: Bayview, Bellingham, Bodega, Carr Inlet, Coos, Homer
 
-dataprior <- subset(fulldata2, fulldata2$Buoy =='Bayview'|fulldata2$Buoy =='Bellingham'|
+dataprior <- subset(fulldata2, fulldata2$Buoy =='Homer'|fulldata2$Buoy =='Bayview'|fulldata2$Buoy =='Bellingham'|
                     fulldata2$Buoy =='Bodega'|fulldata2$Buoy =='Carr Inlet'|
-                    fulldata2$Buoy =='Coos'|fulldata2$Buoy =='Homer') 
+                    fulldata2$Buoy =='Coos') 
 
 # scaling data prior
 dataprior$Salinity_mean_2017_sc <- scale(dataprior$Salinity_mean_2017, center = TRUE, scale = TRUE) # scaling lat
