@@ -615,8 +615,13 @@ fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, 
 # now I'm going to merge that csv with "fulldata", merging by buoys and 
 # adding 6 new cols
 
+
+todrop <- which(fulldata$pH_mean_sc < -3)
+fulldata <- fulldata[-todrop,]
+
+
 ### MERGING DATASETS
-buoys_prior <- read.csv("buoys_prior.csv", header=T, sep=",")
+#buoys_prior <- read.csv("buoys_prior.csv", header=T, sep=",")
 fulldata2 <- merge(fulldata, buoys_prior, merge.by= Buoy, all.x = TRUE)
 
 ### SUBSETTING DATASET TO INCLUDE ONLY BUOYS WITH 2017-18 DATA
@@ -634,27 +639,44 @@ dataprior$SST_mean_2018_sc <- scale(dataprior$SST_mean_2018, center = TRUE, scal
 dataprior$pH_mean_2017_sc <- scale(dataprior$pH_mean_2017, center = TRUE, scale = TRUE) # scaling lat
 dataprior$pH_mean_2018_sc <- scale(dataprior$pH_mean_2018, center = TRUE, scale = TRUE) # scaling lat
 
+## plotting pH to understand
+phplot<-ggplot(fulldata,aes(State,pH_mean,color=State), color=State) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
+  geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+  geom_point(size=4) +
+  theme_classic() +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color=NA))
+phplot
+  
+  
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
 mod <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
 summary(mod)
 anova(mod)
 vif(mod)
+car::Anova(mod, type=3) # getting p-values 
+
 # + DOsat_mean_sc + Turbidity_mean_sc + Chlorophyll_mean_sc
 
-mod2 <- glmer(Infested ~ pH_mean_sc*State + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)
-summary(mod2)
+mod2 <- glmer(Infested ~ pH_mean_sc*State + (1|Year_sc), family="binomial", data = fulldata)
+summary(mod2) #(1|State/Farm)
+car::Anova(mod2, type=3) # getting p-values 
 
 ## for the next models I'll use only the subset  for the buoys with 2017-18 data
-mod3 <- glmer(Infested ~ pH_mean_2017_sc + SST_mean_2017_sc + Salinity_mean_2017_sc + (1|Year_sc) + (1|State/Farm), family="binomial", data = dataprior)
+mod3 <- glmer(Infested ~ pH_mean_2017_sc + SST_mean_2017_sc + Salinity_mean_2017_sc + (1|Year_sc), family="binomial", data = dataprior)
 summary(mod3)
 anova(mod3)
 vif(mod3)
+car::Anova(mod3, type=3) # getting p-values 
 
-mod4 <- glmer(Infested ~ pH_mean_2018 + SST_mean_2018 + Salinity_mean_2018 + (1|Year_sc) + (1|State/Farm), family="binomial", data = dataprior)
+mod4 <- glmer(Infested ~ pH_mean_2018_sc + SST_mean_2018_sc + Salinity_mean_2018_sc + (1|Year_sc), family="binomial", data = dataprior)
 summary(mod4)
 anova(mod4)
 vif(mod4)
+car::Anova(mod4, type=3) # getting p-values 
 
 ### MODEL TESTING FOR each STATE
 ###########################################################
