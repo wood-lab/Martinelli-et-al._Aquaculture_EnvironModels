@@ -34,9 +34,6 @@ todrop <- which(data$Salinity > 50)
 data <- data[-todrop,]
 data$ID <- paste(data$Year, data$Season, data$Buoy)
 
-# creating summary table 
-# data.summ <- data %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# data.summ$ID <- paste(data.summ$Year, data.summ$Season, data.summ$Buoy)
 
 # plotting env data just to check
 # plot <-  ggplot(data, aes(x= Season, y = Salinity, color=Salinity, show.legend = FALSE, fill=Season), na.rm=T)  +
@@ -59,12 +56,7 @@ yq <- as.yearqtr(as.yearmon(carr$Date, "%m/%d/%Y") + 1/12)
 carr$Season <- factor(format(yq, "%q"), levels = 1:4, 
                       labels = c("Winter", "Spring", "Summer", "Fall"))
 carr <- carr %>% separate(Date, sep="-", into = c("Year"))
-
 carr$ID <- paste(carr$Year, carr$Season, carr$Buoy)
-
-# creating summary table 
-# carr.summ <- carr %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# carr.summ$ID <- paste(carr.summ$Year, carr.summ$Season, carr.summ$Buoy)
 
 # plotting env data just to check
 # plot <- ggplot(carr, aes(x= Season, y= Salinity, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
@@ -89,10 +81,6 @@ cherry$Season <- factor(format(yq, "%q"), levels = 1:4,
 cherry <- cherry %>% separate(Date, sep="-", into = c("Year"))
 cherry$ID <- paste(cherry$Year, cherry$Season, cherry$Buoy)
 
-# creating summary table 
-# cherry.summ <- cherry %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# cherry.summ$ID <- paste(cherry.summ$Year, cherry.summ$Season, cherry.summ$Buoy)
-
 # plotting env data just to check
 # plot <- ggplot(cherry, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -115,10 +103,6 @@ hoodsport$Season <- factor(format(yq, "%q"), levels = 1:4,
                            labels = c("Winter", "Spring", "Summer", "Fall"))
 hoodsport <- hoodsport %>% separate(Date, sep="-", into = c("Year"))
 hoodsport$ID <- paste(hoodsport$Year, hoodsport$Season, hoodsport$Buoy)
-
-# creating summary table 
-# hoodsport.summ <- hoodsport %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# hoodsport.summ$ID <- paste(hoodsport.summ$Year, hoodsport.summ$Season, hoodsport.summ$Buoy)
 
 # plotting env data just to check
 # plot <- ggplot(hoodsport, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season))  +
@@ -143,10 +127,6 @@ ptownsend$Season <- factor(format(yq, "%q"), levels = 1:4,
 ptownsend <- ptownsend %>% separate(Date, sep="-", into = c("Year"))
 ptownsend$ID <- paste(ptownsend$Year, ptownsend$Season, ptownsend$Buoy)
 
-# creating summary table 
-# ptownsend.summ <- ptownsend %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# ptownsend.summ$ID <- paste(ptownsend.summ$Year, ptownsend.summ$Season, ptownsend.summ$Buoy)
-
 # plotting env data just to check
 # plot <- ggplot(ptownsend, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -169,10 +149,6 @@ tokeland$Season <- factor(format(yq, "%q"), levels = 1:4,
                           labels = c("Winter", "Spring", "Summer", "Fall"))
 tokeland <- tokeland %>% separate(Date, sep="-", into = c("Year"))
 tokeland$ID <- paste(tokeland$Year, tokeland$Season, tokeland$Buoy)
-
-# creating summary table 
-# tokeland.summ <- tokeland %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# tokeland.summ$ID <- paste(tokeland.summ$Year, tokeland.summ$Season, tokeland.summ$Buoy)
 
 # plotting env data just to check
 # plot <- ggplot(tokeland, aes(x= Season, y= pH, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
@@ -222,10 +198,6 @@ coos$Season <- factor(format(yq, "%q"), levels = 1:4,
 coos <- coos %>% separate(Date, sep="-", into = c("Year"))
 coos$ID <- paste(coos$Year, coos$Season, coos$Buoy)
 
-# creating summary table 
-# coos.summ <- coos %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# coos.summ$ID <- paste(coos.summ$Year, coos.summ$Season, coos.summ$Buoy)
-
 # plotting env data just to check
 # plot <- ggplot(coos, aes(x=Season, y=pH, color=Season, show.legend=FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -255,10 +227,6 @@ bodega$ID <- paste(bodega$Year, bodega$Season, bodega$Buoy)
 todrop <- which(bodega$SST < 5) 
 bodega <- bodega[-todrop,]
 
-# creating summary table 
-# bodega.summ <- bodega %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# bodega.summ$ID <- paste(bodega.summ$Year, bodega.summ$Season, bodega.summ$Buoy)
-
 # plotting env data just to check
 # plot <- ggplot(bodega, aes(x=Season, y=SST, color=Season, show.legend=FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -281,10 +249,6 @@ yaquina$Season <- factor(format(yq, "%q"), levels = 1:4,
 yaquina <- yaquina %>% separate(Date, sep="-", into = c("Year"))
 yaquina$ID <- paste(yaquina$Year, yaquina$Season, yaquina$Buoy)
 
-# # creating summary table 
-# yaquina.summ <- yaquina %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# yaquina.summ$ID <- paste(yaquina.summ$Year, yaquina.summ$Season, yaquina.summ$Buoy)
-
 # plotting env data just to check
 # plot <- ggplot(yaquina, aes(x=Season, y=SST, color=Season, show.legend=FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -302,10 +266,6 @@ colnames(netarts) <- c('pH','Salinity','SST','Year')
 netarts <- mutate(netarts, Buoy = "Netarts") # adding col for buoy
 netarts <- as.data.frame(netarts)
 netarts$ID <- paste(netarts$Year, netarts$Season, netarts$Buoy)
-
-# # creating summary table 
-# netarts.summ <- netarts %>% group_by(Date, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# netarts.summ$ID <- paste(netarts.summ$Date)
 
 # plotting env data just to check
 # plot <- ggplot(netarts, aes(x=Year, y=pH, color=Year, show.legend=FALSE, fill= Year))  +
@@ -330,10 +290,6 @@ ketchikan$Season <- factor(format(yq, "%q"), levels = 1:4,
 ketchikan <- ketchikan %>% separate(Date, sep="-", into = c("Year"))
 ketchikan$ID <- paste(ketchikan$Year, ketchikan$Season, ketchikan$Buoy)
 
-# creating summary table 
-# ketchikan.summ <- ketchikan %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# ketchikan.summ$ID <- paste(ketchikan.summ$Year, ketchikan.summ$Season, ketchikan.summ$Buoy)
-# 
 # plotting env data just to check
 # plot <- ggplot(ketchikan, aes(x=Season, y=SST, color=Season, show.legend=FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -356,10 +312,6 @@ tillamook$Season <- factor(format(yq, "%q"), levels = 1:4,
 tillamook <- tillamook %>% separate(Date, sep="-", into = c("Year"))
 tillamook$ID <- paste(tillamook$Year, tillamook$Season, tillamook$Buoy)
 
-# creating summary table 
-# tillamook.summ <- tillamook %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# tillamook.summ$ID <- paste(tillamook.summ$Year, tillamook.summ$Season, tillamook.summ$Buoy)
-# 
 # plotting env data just to check
 # plot <- ggplot(tillamook, aes(x=Season, y=SST, color=Season, show.legend=FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -393,10 +345,6 @@ todrop <- which(tom$pH < 7)
 tom <- tom[-todrop,]
 todrop <- which(tom$SST < 5) 
 tom <- tom[-todrop,]
-
-# creating summary table 
-# tom.summ <- tom %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# tom.summ$ID <- paste(tom.summ$Year, tom.summ$Season, tom.summ$Buoy)
 
 # plotting env data just to check
 # plot <- ggplot(tom, aes(x=Season, y=Salinity, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
@@ -432,10 +380,6 @@ humboldt <- humboldt[-todrop,]
 
 humboldt$ID <- paste(humboldt$Year, humboldt$Season, humboldt$Buoy)
 
-# creating summary table 
-# humboldt.summ <- humboldt %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# humboldt.summ$ID <- paste(humboldt.summ$Year, humboldt.summ$Season, humboldt.summ$Buoy)
-
 # plotting env data just to check
 # plot <- ggplot(humboldt, aes(x=Season, y=SST, color=Season, show.legend=FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -459,10 +403,6 @@ homer$Season <- factor(format(yq, "%q"), levels = 1:4,
 homer <- homer %>% separate(Date, sep="-", into = c("Year"))
 homer$ID <- paste(homer$Year, homer$Season, homer$Buoy)
 
-# creating summary table 
-# homer.summ <- homer %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# homer.summ$ID <- paste(homer.summ$Year, homer.summ$Season, homer.summ$Buoy)
-
 # plotting env data just to check
 # plot <- ggplot(homer, aes(x=Season, y=pH, color=Season, show.legend=FALSE, fill= Season, na.rm = TRUE))  +
 #         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
@@ -485,10 +425,6 @@ portalex$Season <- factor(format(yq, "%q"), levels = 1:4,
                           labels = c("Winter", "Spring", "Summer", "Fall"))
 portalex <- portalex %>% separate(Date, sep="-", into = c("Year"))
 portalex$ID <- paste(portalex$Year, portalex$Season, portalex$Buoy)
-
-# creating summary table 
-# portalex.summ <- portalex %>% group_by(Year, Season, Buoy) %>% summarise_all(funs(mean), na.rm=T)
-# portalex.summ$ID <- paste(portalex.summ$Year, portalex.summ$Season, portalex.summ$Buoy)
 
 # plotting env data just to check
 # plot <- ggplot(portalex, aes(x=Season, y=SST, color=Season, show.legend=FALSE, fill= Season, na.rm = TRUE))  +
@@ -563,7 +499,7 @@ buoys_averaged <- buoys %>%
 
 # here, to get the summary for the 2 years prior I'd have to subset
 # only 2017 & 2018 and then merge it to the full dataset to have the
-# prior env included - did not work! Will see about manually doing this
+# prior env included
 
 #buoys_subset <- subset(buoys_averaged, buoys_averaged$Year == "2017" | buoys_averaged$Year== "2018")
 write.csv(buoys_averaged,"buoys_averaged.csv", row.names = FALSE)
@@ -602,9 +538,9 @@ summarytab <- fulldata %>%
 fulldata$Salinity_mean_sc <- scale(fulldata$Salinity_mean, center = TRUE, scale = TRUE) # scaling lat
 fulldata$SST_mean_sc <- scale(fulldata$SST_mean, center = TRUE, scale = TRUE) # scaling lat
 fulldata$pH_mean_sc <- scale(fulldata$pH_mean, center = TRUE, scale = TRUE) # scaling lat
-fulldata$DOsat_mean_sc <- scale(fulldata$DOsat_mean, center = TRUE, scale = TRUE) # scaling lat
-fulldata$Turbidity_mean_sc <- scale(fulldata$Turbidity_mean, center = TRUE, scale = TRUE) # scaling lat
-fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, scale = TRUE) # scaling lat
+# fulldata$DOsat_mean_sc <- scale(fulldata$DOsat_mean, center = TRUE, scale = TRUE) # scaling lat
+# fulldata$Turbidity_mean_sc <- scale(fulldata$Turbidity_mean, center = TRUE, scale = TRUE) # scaling lat
+# fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, scale = TRUE) # scaling lat
 
 #write.csv(fulldata,"Desktop\\fulldata.csv", row.names = FALSE)
 
@@ -615,10 +551,11 @@ fulldata$Chlorophyll_mean_sc <- scale(fulldata$Chlorophyll_mean, center = TRUE, 
 # now I'm going to merge that csv with "fulldata", merging by buoys and 
 # adding 6 new cols
 
-
 todrop <- which(fulldata$pH_mean_sc < -3)
 fulldata <- fulldata[-todrop,]
 
+todrop <- which(fulldata$Salinity_mean < 10)
+fulldata <- fulldata[-todrop,]
 
 ### MERGING DATASETS
 #buoys_prior <- read.csv("buoys_prior.csv", header=T, sep=",")
@@ -639,7 +576,7 @@ dataprior$SST_mean_2018_sc <- scale(dataprior$SST_mean_2018, center = TRUE, scal
 dataprior$pH_mean_2017_sc <- scale(dataprior$pH_mean_2017, center = TRUE, scale = TRUE) # scaling lat
 dataprior$pH_mean_2018_sc <- scale(dataprior$pH_mean_2018, center = TRUE, scale = TRUE) # scaling lat
 
-## plotting pH to understand
+## plotting pH FULLDATA
 phplot<-ggplot(fulldata,aes(State,pH_mean,color=State), color=State) +
   scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
   geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
@@ -649,8 +586,69 @@ phplot<-ggplot(fulldata,aes(State,pH_mean,color=State), color=State) +
         axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
         panel.grid.minor=element_line(color=NA))
 phplot
-  
-  
+
+## plotting Salinity FULLDATA
+salinityplot<-ggplot(fulldata,aes(State,Salinity_mean,color=State), color=State) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
+  geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+  geom_point(size=4) +
+  theme_classic() +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color=NA))
+salinityplot
+
+## plotting SST FULLDATA
+sstplot<-ggplot(fulldata,aes(State,SST_mean,color=State), color=State) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
+  geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+  geom_point(size=4) +
+  theme_classic() +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color=NA))
+sstplot
+
+## plotting pH DATAPRIOR
+phplot<-ggplot(dataprior,aes(State,pH_mean_2018,color=State), color=State) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
+  geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+  geom_point(size=4) +
+  theme_classic() +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color=NA))
+phplot
+
+## plotting Salinity DATAPRIOR
+todrop <- which(dataprior$Salinity_mean_2017 < 25)
+dataprior <- dataprior[-todrop,]
+
+salinityplot<-ggplot(dataprior,aes(State,Salinity_mean_2018,color=State), color=State) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
+  geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+  geom_point(size=4) +
+  theme_classic() +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color=NA))
+salinityplot
+
+## plotting SST DATAPRIOR
+todrop <- which(dataprior$SST_mean_2018 < 12)
+dataprior <- dataprior[-todrop,]
+
+sstplot<-ggplot(dataprior,aes(State,SST_mean_2018,color=State), color=State) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
+  geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+  geom_point(size=4) +
+  theme_classic() +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color=NA))
+sstplot
+
+
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
 mod <- glmer(Infested ~ pH_mean_sc + SST_mean_sc + Salinity_mean_sc + (1|Year_sc) + (1|State/Farm), family="binomial", data = fulldata)

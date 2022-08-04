@@ -1,78 +1,260 @@
-"Year","Buoy","SST_mean","Salinity_mean","pH_mean"
-2015,"Ketchikan",NA,NA,NA
-2016,"Ketchikan",NA,NA,NA
-2017,"Bayview",10.7501498843749,28.814994147372,7.88781796899535
-2017,"Bellingham",13.4130813870007,20.5185808447262,NA
-2017,"Bodega",12.6371691907262,NA,NA
-2017,"Carr Inlet",12.9063379626533,27.8990937347423,7.68999189700219
-2017,"Cherry Point",NA,NA,NA
-2017,"Coos",12.0318607815174,26.6870921277809,7.73054021677125
-2017,"Homer",8.3938924628703,28.4914978953221,7.88646652370741
-2017,"Humboldt",NA,NA,NA
-2017,"Ketchikan",NA,NA,NA
-2017,"Netarts",12.0356215499909,30.3204498263572,7.99833704989947
-2017,"P Alexander",NA,NA,NA
-2017,"Port Townsend",NA,NA,NA
-2017,"Tillamook",NA,NA,NA
-2017,"Tokeland",12.7045138269402,25.5234626226583,7.91329894736842
-2017,"Tomales",NA,NA,NA
-2017,"Yaquina",NA,NA,NA
-2018,"Bayview",11.1508834731808,29.0004696583522,7.88012256937484
-2018,"Bellingham",NA,NA,NA
-2018,"Bodega",12.2825498815772,NA,NA
-2018,"Carr Inlet",12.292919085894,28.659880174687,7.96585082064455
-2018,"Coos",12.1024678971309,NA,7.69843655236762
-2018,"Homer",NA,NA,NA
-2018,"Humboldt",NA,NA,NA
-2018,"Ketchikan",NA,NA,NA
-2018,"Netarts",12.4742553003534,31.4600444220091,7.96322387682988
-2018,"P Alexander",NA,NA,NA
-2018,"Port Townsend",NA,NA,NA
-2018,"Tillamook",NA,NA,NA
-2018,"Tokeland",12.0528431402863,25.8224962122383,8.06026777155932
-2018,"Tomales",NA,NA,NA
-2018,"Yaquina",NA,NA,NA
-2019,"Bayview",10.8594250478175,29.4747180907248,7.88969425333295
-2019,"Bellingham",NA,NA,NA
-2019,"Bodega",12.8118244885003,NA,NA
-2019,"Carr Inlet",11.8795627015251,29.0003202628998,7.60141589528322
-2019,"Coos",12.3579654857143,28.4381528571429,7.85486657142857
-2019,"Humboldt",NA,NA,NA
-2019,"Ketchikan",NA,NA,NA
-2019,"Netarts",10.7715143042913,31.0146674252276,7.99484492847854
-2019,"P Alexander",NA,NA,NA
-2019,"Port Townsend",NA,NA,NA
-2019,"Tillamook",NA,NA,NA
-2019,"Tokeland",NA,NA,8.03434439672003
-2019,"Tomales",NA,NA,NA
-2019,"Yaquina",NA,NA,NA
-2020,"Bayview",10.8896552705742,28.7671809615987,7.89406473284181
-2020,"Bellingham",13.8878291131041,24.0688115595416,NA
-2020,"Bodega",NA,NA,NA
-2020,"Carr Inlet",13.5263489770046,29.3898056054245,7.31081312359492
-2020,"Coos",NA,NA,7.86588163495243
-2020,"Hoodsport",14.3152765033169,28.0217576249904,8.02276231545568
-2020,"Humboldt",NA,NA,NA
-2020,"Ketchikan",NA,NA,NA
-2020,"P Alexander",NA,NA,NA
-2020,"Port Townsend",NA,NA,NA
-2020,"Tillamook",NA,NA,NA
-2020,"Tokeland",12.7267927267927,24.7607081807082,8.02818433818434
-2020,"Tomales",NA,NA,NA
-2020,"Yaquina",NA,NA,NA
-2021,"Bayview",10.8617014574922,28.9376485410761,7.90211608395613
-2021,"Bodega",11.2376095468651,NA,NA
-2021,"Carr Inlet",12.9914269732918,29.2358826825008,7.42701518189526
-2021,"Coos",9.86595038363171,23.4704624040921,7.82990076726343
-2021,"Hoodsport",12.6071914925038,26.9702017004783,8.10378987525872
-2021,"Humboldt",NA,NA,NA
-2021,"Ketchikan",NA,NA,NA
-2021,"P Alexander",NA,NA,NA
-2021,"Port Townsend",8.01129943502825,NA,NA
-2021,"Tokeland",12.9349700149925,25.6567683658171,7.93865779610195
-2021,"Tomales",NA,NA,NA
-2021,"Yaquina",9.84387005649718,NA,NA
-2022,"Carr Inlet",8.15982835820896,28.0241059537313,7.73687803656791
-2022,"Hoodsport",5.91889372156506,23.699024533212,8.42189219649045
-2022,"Ketchikan",NA,NA,NA
-NA,"Tomales",NA,NA,NA
+"Year","Buoy","ID","Season","SST_mean","Salinity_mean","pH_mean"
+2015,"Ketchikan","2015 Fall Ketchikan","Fall",NA,NA,NA
+2015,"Ketchikan","2015 Winter Ketchikan","Winter",NA,NA,NA
+2016,"Ketchikan","2016 Fall Ketchikan","Fall",NA,NA,NA
+2016,"Ketchikan","2016 Spring Ketchikan","Spring",NA,NA,NA
+2016,"Ketchikan","2016 Summer Ketchikan","Summer",NA,NA,NA
+2016,"Ketchikan","2016 Winter Ketchikan","Winter",NA,NA,NA
+2017,"Bayview","2017 Fall Bayview","Fall",11.5127233165369,29.4209459459459,7.82840128263857
+2017,"Bayview","2017 Spring Bayview","Spring",9.83420158550396,28.4421857304643,7.95849377123443
+2017,"Bayview","2017 Summer Bayview","Summer",14.9554485727232,28.6304032623471,7.99310149524241
+2017,"Bayview","2017 Winter Bayview","Winter",6.6173092508973,28.7721894176219,7.76802130369341
+2017,"Bellingham","2017 Spring Bellingham","Spring",11.9998321853634,20.6438338819954,NA
+2017,"Bellingham","2017 Summer Bellingham","Summer",15.5616554379211,20.3281576515881,NA
+2017,"Bodega","2017 Fall Bodega","Fall",13.5585155928012,NA,NA
+2017,"Bodega","2017 Spring Bodega","Spring",10.6864623984812,NA,NA
+2017,"Bodega","2017 Summer Bodega","Summer",11.9646978756172,NA,NA
+2017,"Bodega","2017 Winter Bodega","Winter",13.1713852668369,NA,NA
+2017,"Carr Inlet","2017 Fall Carr Inlet","Fall",11.3566447666997,29.4965511259542,7.78058519748092
+2017,"Carr Inlet","2017 Spring Carr Inlet","Spring",11.5769321996166,27.51956338518,8.0895959013205
+2017,"Carr Inlet","2017 Summer Carr Inlet","Summer",15.2950974199325,27.9427410926548,7.13066533509371
+2017,"Carr Inlet","2017 Winter Carr Inlet","Winter",10.0432540723279,29.498132,7.71026847917321
+2017,"Cherry Point","2017 Fall Cherry Point","Fall",NA,NA,NA
+2017,"Cherry Point","2017 Summer Cherry Point","Summer",NA,NA,NA
+2017,"Cherry Point","2017 Winter Cherry Point","Winter",NA,NA,NA
+2017,"Coos","2017 Fall Coos","Fall",12.7259906114037,29.7864277536066,7.68789214563774
+2017,"Coos","2017 Spring Coos","Spring",11.6862136142258,22.6079408766565,7.80287914826141
+2017,"Coos","2017 Summer Coos","Summer",14.1520713476784,30.9778776896942,7.62259569648924
+2017,"Coos","2017 Winter Coos","Winter",9.52438756201685,23.3477120110765,7.80980154609438
+2017,"Homer","2017 Fall Homer","Fall",7.92767857142857,27.5800824175824,7.67287087912088
+2017,"Homer","2017 Spring Homer","Spring",6.81478055077453,30.6047332185886,8.14266351118761
+2017,"Homer","2017 Summer Homer","Summer",11.0928781702899,27.8540760869565,8.02227128623188
+2017,"Homer","2017 Winter Homer","Winter",4.20478759271746,29.7624072825354,7.70971004720162
+2017,"Humboldt","2017 Fall Humboldt","Fall",NA,NA,NA
+2017,"Humboldt","2017 Spring Humboldt","Spring",NA,32.9278260869565,NA
+2017,"Humboldt","2017 Summer Humboldt","Summer",NA,NA,NA
+2017,"Humboldt","2017 Winter Humboldt","Winter",NA,NA,NA
+2017,"Ketchikan","2017 Fall Ketchikan","Fall",NA,NA,NA
+2017,"Ketchikan","2017 Spring Ketchikan","Spring",NA,NA,NA
+2017,"Ketchikan","2017 Summer Ketchikan","Summer",NA,NA,NA
+2017,"Ketchikan","2017 Winter Ketchikan","Winter",NA,NA,NA
+2017,"Netarts","2017  Netarts",NA,12.0356215499909,30.3204498263572,7.99833704989947
+2017,"P Alexander","2017 Fall P Alexander","Fall",NA,NA,NA
+2017,"P Alexander","2017 Spring P Alexander","Spring",NA,NA,NA
+2017,"P Alexander","2017 Summer P Alexander","Summer",NA,NA,NA
+2017,"P Alexander","2017 Winter P Alexander","Winter",NA,NA,NA
+2017,"Port Townsend","2017 Fall Port Townsend","Fall",NA,NA,NA
+2017,"Port Townsend","2017 Summer Port Townsend","Summer",NA,NA,NA
+2017,"Port Townsend","2017 Winter Port Townsend","Winter",NA,NA,NA
+2017,"Tillamook","2017 Fall Tillamook","Fall",12.1313598901099,NA,NA
+2017,"Tillamook","2017 Summer Tillamook","Summer",NA,NA,NA
+2017,"Tillamook","2017 Winter Tillamook","Winter",NA,NA,NA
+2017,"Tokeland","2017 Fall Tokeland","Fall",13.1942857142857,28.4612451827243,7.91117419955748
+2017,"Tokeland","2017 Spring Tokeland","Spring",11.0424124957245,21.3119621479877,7.96202847069399
+2017,"Tokeland","2017 Summer Tokeland","Summer",15.8818064212631,28.8770469246148,7.85306052623227
+2017,"Tokeland","2017 Winter Tokeland","Winter",7.70644761314321,21.2819032858029,7.94454177846249
+2017,"Tomales","2017 Fall Tomales","Fall",NA,NA,NA
+2017,"Tomales","2017 Spring Tomales","Spring",14.8731424460714,NA,NA
+2017,"Tomales","2017 Summer Tomales","Summer",NA,NA,NA
+2017,"Tomales","2017 Winter Tomales","Winter",NA,NA,NA
+2017,"Yaquina","2017 Fall Yaquina","Fall",NA,NA,NA
+2017,"Yaquina","2017 Summer Yaquina","Summer",NA,NA,NA
+2018,"Bayview","2018 Fall Bayview","Fall",11.6226611702737,29.6333447841521,7.78919042711554
+2018,"Bayview","2018 Spring Bayview","Spring",10.3233775059463,28.6520670517612,7.96774266621361
+2018,"Bayview","2018 Summer Bayview","Summer",15.0169056084413,28.9506594792981,8.08153457965363
+2018,"Bayview","2018 Winter Bayview","Winter",7.61744616809447,28.767017828201,7.67919657328085
+2018,"Bellingham","2018 Fall Bellingham","Fall",NA,NA,NA
+2018,"Bellingham","2018 Spring Bellingham","Spring",11.6647923130539,19.4793586577716,NA
+2018,"Bellingham","2018 Summer Bellingham","Summer",16.8204633609234,24.0658976383932,NA
+2018,"Bellingham","2018 Winter Bellingham","Winter",NA,NA,NA
+2018,"Bodega","2018 Fall Bodega","Fall",13.4358254338966,NA,NA
+2018,"Bodega","2018 Spring Bodega","Spring",11.3329211396476,NA,NA
+2018,"Bodega","2018 Summer Bodega","Summer",11.9225354441274,NA,NA
+2018,"Bodega","2018 Winter Bodega","Winter",12.4779293180687,NA,NA
+2018,"Carr Inlet","2018 Fall Carr Inlet","Fall",15.6784503045567,29.4954568248574,7.51428188823439
+2018,"Carr Inlet","2018 Spring Carr Inlet","Spring",10.773058630864,28.460287807772,8.10240467973986
+2018,"Carr Inlet","2018 Summer Carr Inlet","Summer",15.6712871376051,28.8406198603551,7.98423986476504
+2018,"Carr Inlet","2018 Winter Carr Inlet","Winter",8.42637075307293,28.4793543535474,7.74223491854776
+2018,"Coos","2018 Fall Coos","Fall",12.6235922363449,32.4879766403298,7.70128707202565
+2018,"Coos","2018 Spring Coos","Spring",11.3925826727067,25.3365062287656,7.62622876557191
+2018,"Coos","2018 Summer Coos","Summer",14.0504983008609,32.0864941096511,7.66121771635705
+2018,"Coos","2018 Winter Coos","Winter",10.1442256799494,NA,7.8175091714105
+2018,"Homer","2018 Spring Homer","Spring",NA,NA,NA
+2018,"Homer","2018 Summer Homer","Summer",11.0318767589987,27.616427195971,8.01893052881055
+2018,"Homer","2018 Winter Homer","Winter",NA,NA,NA
+2018,"Humboldt","2018 Fall Humboldt","Fall",NA,NA,NA
+2018,"Humboldt","2018 Spring Humboldt","Spring",NA,NA,NA
+2018,"Humboldt","2018 Summer Humboldt","Summer",NA,NA,NA
+2018,"Humboldt","2018 Winter Humboldt","Winter",NA,NA,NA
+2018,"Ketchikan","2018 Fall Ketchikan","Fall",NA,NA,NA
+2018,"Ketchikan","2018 Spring Ketchikan","Spring",NA,NA,NA
+2018,"Ketchikan","2018 Summer Ketchikan","Summer",NA,NA,NA
+2018,"Ketchikan","2018 Winter Ketchikan","Winter",NA,NA,NA
+2018,"Netarts","2018  Netarts",NA,12.4742553003534,31.4600444220091,7.96322387682988
+2018,"P Alexander","2018 Fall P Alexander","Fall",NA,NA,NA
+2018,"P Alexander","2018 Spring P Alexander","Spring",NA,NA,NA
+2018,"P Alexander","2018 Summer P Alexander","Summer",NA,NA,NA
+2018,"P Alexander","2018 Winter P Alexander","Winter",NA,NA,NA
+2018,"Port Townsend","2018 Fall Port Townsend","Fall",NA,NA,NA
+2018,"Port Townsend","2018 Spring Port Townsend","Spring",NA,NA,NA
+2018,"Port Townsend","2018 Summer Port Townsend","Summer",NA,NA,NA
+2018,"Port Townsend","2018 Winter Port Townsend","Winter",NA,NA,NA
+2018,"Tillamook","2018 Fall Tillamook","Fall",NA,NA,NA
+2018,"Tillamook","2018 Spring Tillamook","Spring",NA,NA,NA
+2018,"Tillamook","2018 Summer Tillamook","Summer",NA,NA,NA
+2018,"Tillamook","2018 Winter Tillamook","Winter",NA,NA,NA
+2018,"Tokeland","2018 Fall Tokeland","Fall",12.6767130028294,28.5743781522943,7.9240693812277
+2018,"Tokeland","2018 Spring Tokeland","Spring",11.2718998862344,22.7592002275313,8.24439817974972
+2018,"Tokeland","2018 Summer Tokeland","Summer",16.14007115562,29.4419132955594,7.95651337462116
+2018,"Tokeland","2018 Winter Tokeland","Winter",8.32184348270139,22.8975079790629,8.09550874505298
+2018,"Tomales","2018 Fall Tomales","Fall",NA,NA,NA
+2018,"Tomales","2018 Spring Tomales","Spring",NA,NA,NA
+2018,"Tomales","2018 Summer Tomales","Summer",NA,NA,NA
+2018,"Tomales","2018 Winter Tomales","Winter",NA,NA,NA
+2018,"Yaquina","2018 Fall Yaquina","Fall",NA,NA,NA
+2018,"Yaquina","2018 Summer Yaquina","Summer",NA,NA,NA
+2018,"Yaquina","2018 Winter Yaquina","Winter",NA,NA,NA
+2019,"Bayview","2019 Fall Bayview","Fall",11.1377505440385,29.3433512770588,7.83107318749284
+2019,"Bayview","2019 Spring Bayview","Spring",10.4249150622877,29.5364099660249,8.01390713476784
+2019,"Bayview","2019 Summer Bayview","Summer",14.6727149167516,29.5969532223355,7.98473213274436
+2019,"Bayview","2019 Winter Bayview","Winter",7.12509549716402,29.4195045722885,7.72485241347378
+2019,"Bellingham","2019 Fall Bellingham","Fall",11.4800073875361,0.694938196450681,NA
+2019,"Bellingham","2019 Spring Bellingham","Spring",NA,NA,NA
+2019,"Bellingham","2019 Summer Bellingham","Summer",NA,NA,NA
+2019,"Bellingham","2019 Winter Bellingham","Winter",NA,NA,NA
+2019,"Bodega","2019 Fall Bodega","Fall",12.9399432234432,NA,NA
+2019,"Bodega","2019 Spring Bodega","Spring",12.6313461974,NA,NA
+2019,"Bodega","2019 Summer Bodega","Summer",12.8021058732612,NA,NA
+2019,"Bodega","2019 Winter Bodega","Winter",12.8794048509714,NA,NA
+2019,"Carr Inlet","2019 Fall Carr Inlet","Fall",13.5554713551956,29.0005808007546,7.59146133281114
+2019,"Carr Inlet","2019 Winter Carr Inlet","Winter",9.81947294803303,29,7.61365241670957
+2019,"Coos","2019 Fall Coos","Fall",12.9491401976557,31.6971202022524,7.91428981843254
+2019,"Coos","2019 Spring Coos","Spring",11.8143338618347,25.3651041902605,7.80884484711212
+2019,"Coos","2019 Summer Coos","Summer",14.7875469988675,31.3965096262741,7.78038731596829
+2019,"Coos","2019 Winter Coos","Winter",9.83454109747627,25.272280620514,7.91818244964112
+2019,"Humboldt","2019 Fall Humboldt","Fall",NA,NA,NA
+2019,"Humboldt","2019 Spring Humboldt","Spring",NA,NA,NA
+2019,"Humboldt","2019 Summer Humboldt","Summer",NA,NA,NA
+2019,"Humboldt","2019 Winter Humboldt","Winter",NA,NA,NA
+2019,"Ketchikan","2019 Fall Ketchikan","Fall",NA,NA,NA
+2019,"Ketchikan","2019 Spring Ketchikan","Spring",NA,NA,NA
+2019,"Ketchikan","2019 Summer Ketchikan","Summer",NA,NA,NA
+2019,"Ketchikan","2019 Winter Ketchikan","Winter",NA,NA,NA
+2019,"Netarts","2019  Netarts",NA,10.7715143042913,31.0146674252276,7.99484492847854
+2019,"P Alexander","2019 Fall P Alexander","Fall",NA,NA,NA
+2019,"P Alexander","2019 Spring P Alexander","Spring",NA,NA,NA
+2019,"P Alexander","2019 Summer P Alexander","Summer",NA,NA,NA
+2019,"P Alexander","2019 Winter P Alexander","Winter",NA,NA,NA
+2019,"Port Townsend","2019 Fall Port Townsend","Fall",NA,NA,NA
+2019,"Port Townsend","2019 Spring Port Townsend","Spring",9.06674208144796,NA,NA
+2019,"Port Townsend","2019 Summer Port Townsend","Summer",NA,NA,NA
+2019,"Port Townsend","2019 Winter Port Townsend","Winter",NA,NA,NA
+2019,"Tillamook","2019 Fall Tillamook","Fall",12.6410164835165,NA,NA
+2019,"Tillamook","2019 Spring Tillamook","Spring",NA,NA,NA
+2019,"Tillamook","2019 Summer Tillamook","Summer",14.3086050724638,NA,NA
+2019,"Tillamook","2019 Winter Tillamook","Winter",NA,NA,NA
+2019,"Tokeland","2019 Fall Tokeland","Fall",13.1709028177113,26.7750327774583,8.01949166187464
+2019,"Tokeland","2019 Spring Tokeland","Spring",NA,NA,8.07590151703556
+2019,"Tokeland","2019 Summer Tokeland","Summer",16.633733545494,29.801663532475,8.00870967741935
+2019,"Tokeland","2019 Winter Tokeland","Winter",NA,NA,8.0576274870423
+2019,"Tomales","2019 Fall Tomales","Fall",NA,NA,NA
+2019,"Tomales","2019 Spring Tomales","Spring",NA,NA,NA
+2019,"Tomales","2019 Summer Tomales","Summer",NA,NA,NA
+2019,"Tomales","2019 Winter Tomales","Winter",NA,NA,NA
+2019,"Yaquina","2019 Fall Yaquina","Fall",NA,NA,NA
+2019,"Yaquina","2019 Spring Yaquina","Spring",NA,NA,NA
+2019,"Yaquina","2019 Summer Yaquina","Summer",NA,NA,NA
+2019,"Yaquina","2019 Winter Yaquina","Winter",NA,NA,NA
+2020,"Bayview","2020 Fall Bayview","Fall",11.3338179736691,29.0933600457928,7.75008586147682
+2020,"Bayview","2020 Spring Bayview","Spring",10.1828218774771,29.014686898426,8.06006114822783
+2020,"Bayview","2020 Summer Bayview","Summer",14.3929550345452,28.4360289953562,8.0421565296183
+2020,"Bayview","2020 Winter Bayview","Winter",7.61871994504236,28.5254637050607,7.72051751774674
+2020,"Bellingham","2020 Fall Bellingham","Fall",11.7755332788493,25.3845146289637,NA
+2020,"Bellingham","2020 Summer Bellingham","Summer",17.4743871471708,22.6258818432454,NA
+2020,"Bellingham","2020 Winter Bellingham","Winter",7.1009133640553,0.528963133640553,NA
+2020,"Bodega","2020 Fall Bodega","Fall",NA,NA,NA
+2020,"Bodega","2020 Spring Bodega","Spring",11.7985763134058,NA,NA
+2020,"Bodega","2020 Summer Bodega","Summer",NA,NA,NA
+2020,"Bodega","2020 Winter Bodega","Winter",12.3331442897701,NA,NA
+2020,"Carr Inlet","2020 Fall Carr Inlet","Fall",13.7672338726334,29.8883859166919,7.76509302215215
+2020,"Carr Inlet","2020 Spring Carr Inlet","Spring",11.61222951438,28.9658591397705,7.41260256366462
+2020,"Carr Inlet","2020 Summer Carr Inlet","Summer",16.7311564891564,29.2566209558238,6.62241775734915
+2020,"Carr Inlet","2020 Winter Carr Inlet","Winter",9.50495946365248,29.2846196917043,7.63349984066866
+2020,"Coos","2020 Fall Coos","Fall",NA,NA,7.74049966009517
+2020,"Coos","2020 Spring Coos","Spring",11.9113086503623,26.3767062952899,7.98255661231884
+2020,"Coos","2020 Summer Coos","Summer",14.2547651079137,NA,7.91240647482014
+2020,"Coos","2020 Winter Coos","Winter",9.84900549576368,23.8433043279139,7.84498282573849
+2020,"Hoodsport","2020 Fall Hoodsport","Fall",12.814605290637,27.4648375217427,7.9825080738414
+2020,"Hoodsport","2020 Spring Hoodsport","Spring",13.2316302852102,28.8404253934725,8.22747492675713
+2020,"Hoodsport","2020 Summer Hoodsport","Summer",18.2230563200755,28.359905392246,8.0351498650367
+2020,"Hoodsport","2020 Winter Hoodsport","Winter",8.57333624651811,27.7260331324164,7.86460215175
+2020,"Humboldt","2020 Fall Humboldt","Fall",NA,NA,NA
+2020,"Humboldt","2020 Spring Humboldt","Spring",NA,NA,NA
+2020,"Humboldt","2020 Summer Humboldt","Summer",NA,NA,NA
+2020,"Humboldt","2020 Winter Humboldt","Winter",NA,NA,NA
+2020,"Ketchikan","2020 Fall Ketchikan","Fall",NA,NA,NA
+2020,"Ketchikan","2020 Spring Ketchikan","Spring",NA,NA,NA
+2020,"Ketchikan","2020 Summer Ketchikan","Summer",NA,NA,NA
+2020,"Ketchikan","2020 Winter Ketchikan","Winter",NA,NA,NA
+2020,"P Alexander","2020 Fall P Alexander","Fall",NA,NA,NA
+2020,"P Alexander","2020 Spring P Alexander","Spring",NA,NA,NA
+2020,"P Alexander","2020 Summer P Alexander","Summer",NA,NA,NA
+2020,"P Alexander","2020 Winter P Alexander","Winter",NA,NA,NA
+2020,"Port Townsend","2020 Fall Port Townsend","Fall",NA,NA,NA
+2020,"Port Townsend","2020 Spring Port Townsend","Spring",8.99365942028986,NA,NA
+2020,"Port Townsend","2020 Summer Port Townsend","Summer",NA,NA,NA
+2020,"Port Townsend","2020 Winter Port Townsend","Winter",NA,NA,NA
+2020,"Tillamook","2020 Fall Tillamook","Fall",12.1979532967033,NA,NA
+2020,"Tillamook","2020 Spring Tillamook","Spring",11.2489673913043,NA,NA
+2020,"Tillamook","2020 Summer Tillamook","Summer",NA,NA,NA
+2020,"Tillamook","2020 Winter Tillamook","Winter",NA,NA,NA
+2020,"Tokeland","2020 Fall Tokeland","Fall",13.528422125924,27.4149745093041,7.87538873311241
+2020,"Tokeland","2020 Spring Tokeland","Spring",11.5239710009355,22.8566674462114,8.15555308699719
+2020,"Tokeland","2020 Summer Tokeland","Summer",16.0719588122605,27.8641810344828,8.01925287356322
+2020,"Tokeland","2020 Winter Tokeland","Winter",8.41527102467135,19.2749846929588,8.06135062128579
+2020,"Tomales","2020 Fall Tomales","Fall",NA,NA,NA
+2020,"Tomales","2020 Spring Tomales","Spring",NA,NA,NA
+2020,"Tomales","2020 Summer Tomales","Summer",NA,NA,NA
+2020,"Tomales","2020 Winter Tomales","Winter",NA,NA,NA
+2020,"Yaquina","2020 Fall Yaquina","Fall",12.0991071428571,NA,NA
+2020,"Yaquina","2020 Spring Yaquina","Spring",11.2318161231884,NA,NA
+2020,"Yaquina","2020 Summer Yaquina","Summer",NA,NA,NA
+2020,"Yaquina","2020 Winter Yaquina","Winter",NA,NA,NA
+2021,"Bayview","2021 Fall Bayview","Fall",11.2268384879725,29.1544444444444,7.76241695303551
+2021,"Bayview","2021 Spring Bayview","Spring",10.1272675801155,29.0473445815876,8.04600837957196
+2021,"Bayview","2021 Summer Bayview","Summer",14.8097757136384,29.4154055278659,8.05973040326235
+2021,"Bayview","2021 Winter Bayview","Winter",7.1640848371221,28.1081438950082,7.73307944691821
+2021,"Bodega","2021 Spring Bodega","Spring",10.8184187404086,NA,NA
+2021,"Bodega","2021 Winter Bodega","Winter",11.7295917502472,NA,NA
+2021,"Carr Inlet","2021 Fall Carr Inlet","Fall",13.3557169897901,29.8893954961133,7.52446427960067
+2021,"Carr Inlet","2021 Spring Carr Inlet","Spring",10.6382321856821,28.6476302607848,7.69219562787582
+2021,"Carr Inlet","2021 Summer Carr Inlet","Summer",17.1388925880923,29.3785183433183,6.8905731574644
+2021,"Carr Inlet","2021 Winter Carr Inlet","Winter",9.35411449667221,28.8374399752059,7.70402000300042
+2021,"Coos","2021 Spring Coos","Spring",10.0562886824737,25.6347347836715,7.86258127597165
+2021,"Coos","2021 Winter Coos","Winter",9.7289563687544,21.9127498240676,7.80637931034483
+2021,"Hoodsport","2021 Fall Hoodsport","Fall",12.7253610801688,27.3910319970464,8.04611218483899
+2021,"Hoodsport","2021 Spring Hoodsport","Spring",11.4343504828261,27.3236290201809,8.07333287471593
+2021,"Hoodsport","2021 Summer Hoodsport","Summer",18.2924007947321,28.2172329493188,8.06892786737965
+2021,"Hoodsport","2021 Winter Hoodsport","Winter",7.60652773527626,24.9825077539769,8.21283342141251
+2021,"Humboldt","2021 Spring Humboldt","Spring",NA,NA,NA
+2021,"Humboldt","2021 Winter Humboldt","Winter",NA,NA,NA
+2021,"Ketchikan","2021 Fall Ketchikan","Fall",NA,NA,NA
+2021,"Ketchikan","2021 Spring Ketchikan","Spring",NA,NA,NA
+2021,"Ketchikan","2021 Summer Ketchikan","Summer",NA,NA,NA
+2021,"Ketchikan","2021 Winter Ketchikan","Winter",NA,NA,NA
+2021,"P Alexander","2021 Spring P Alexander","Spring",NA,NA,NA
+2021,"P Alexander","2021 Winter P Alexander","Winter",NA,NA,NA
+2021,"Port Townsend","2021 Winter Port Townsend","Winter",8.01129943502825,NA,NA
+2021,"Tokeland","2021 Fall Tokeland","Fall",14.1161048689139,29.591425093633,7.88654119850187
+2021,"Tokeland","2021 Spring Tokeland","Spring",11.0628966455122,23.3310131459655,8.02364347234814
+2021,"Tokeland","2021 Summer Tokeland","Summer",16.1878718535469,28.6402505720824,7.86775171624714
+2021,"Tokeland","2021 Winter Tokeland","Winter",8.11016949152542,18.6217478813559,7.9778813559322
+2021,"Tomales","2021 Fall Tomales","Fall",NA,NA,NA
+2021,"Tomales","2021 Spring Tomales","Spring",NA,NA,NA
+2021,"Tomales","2021 Summer Tomales","Summer",NA,NA,NA
+2021,"Tomales","2021 Winter Tomales","Winter",NA,NA,NA
+2021,"Yaquina","2021 Winter Yaquina","Winter",9.84387005649718,NA,NA
+2022,"Carr Inlet","2022 Winter Carr Inlet","Winter",8.15982835820896,28.0241059537313,7.73687803656791
+2022,"Hoodsport","2022 Winter Hoodsport","Winter",5.91889372156506,23.699024533212,8.42189219649045
+2022,"Ketchikan","2022 Winter Ketchikan","Winter",NA,NA,NA
+NA,"Tomales","NA NA Tomales",NA,NA,NA,NA
