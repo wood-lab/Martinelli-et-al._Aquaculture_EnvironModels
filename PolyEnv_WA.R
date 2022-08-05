@@ -12,6 +12,8 @@ library(lme4)
 library(lubridate)
 library(car)
 library(wesanderson)
+library(viridis)
+
 
 # info from buoys loaded separately,then, all these files will be joined 
 # with the prev dataset that will be uploaded last
@@ -236,7 +238,7 @@ write.csv(buoys_averaged,"buoys_averaged.csv", row.names = FALSE)
 ###########################################################
 ## ADDING prev DATASET
 ###########################################################
-prev <- read.table("master_spreadsheet_all.csv", header=T, sep=",")
+prev <- read.table("master_spreadsheet_WA.csv", header=T, sep=",")
 # remove L valves to avoid duplication of weights etc
 prev <- subset(prev, prev$Valve =='R') # only keep R valves
 # splitting and creating dates
@@ -275,7 +277,7 @@ fulldata$pH_mean_sc <- scale(fulldata$pH_mean, center = TRUE, scale = TRUE) # sc
 
 ### MODEL TESTING FOR ALL STATES
 ###########################################################
-# in line 558 I summarized the env data we used for years 2017 and 2018
+# above I summarized the env data we used for years 2017 and 2018
 # that was summarized in a csv called "buoys_averaged"
 # now I'm going to merge that csv with "fulldata", merging by buoys and 
 # adding 6 new cols
@@ -293,9 +295,8 @@ fulldata2 <- merge(fulldata, buoys_prior, merge.by= Buoy, all.x = TRUE)
 ### SUBSETTING DATASET TO INCLUDE ONLY BUOYS WITH 2017-18 DATA
 # these buoys are: Bayview, Bellingham, Bodega, Carr Inlet, Coos, Homer
 
-dataprior <- subset(fulldata2, fulldata2$Buoy =='Homer'|fulldata2$Buoy =='Bayview'|fulldata2$Buoy =='Bellingham'|
-                            fulldata2$Buoy =='Bodega'|fulldata2$Buoy =='Carr Inlet'|
-                            fulldata2$Buoy =='Coos') 
+dataprior <- subset(fulldata2, fulldata2$Buoy =='Bayview'|fulldata2$Buoy =='Bellingham'|
+                            fulldata2$Buoy =='Carr Inlet') 
 
 # scaling data prior
 dataprior$Salinity_mean_2017_sc <- scale(dataprior$Salinity_mean_2017, center = TRUE, scale = TRUE) # scaling lat
@@ -306,12 +307,11 @@ dataprior$pH_mean_2017_sc <- scale(dataprior$pH_mean_2017, center = TRUE, scale 
 dataprior$pH_mean_2018_sc <- scale(dataprior$pH_mean_2018, center = TRUE, scale = TRUE) # scaling lat
 
 ## plotting pH FULLDATA
-wafulldata <- subset(fulldata, fulldata$State =='WA')
-
-phplot <-ggplot(wafulldata,aes(Year, pH_mean, color=Year), color=Year) +
+phplot <- ggplot(fulldata,aes(x=Year, y=pH_mean, fill=Year, group=Year)) +
         #scale_color_manual(values=wes_palette("GrandBudapest1", n = 3)) + 
-        #geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
-        geom_point(size=4) +
+        geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+        geom_point(stat = "identity", size= 4, shape = 21, lwd=2, show.legend = FALSE) +
+        scale_fill_viridis(discrete = FALSE, option = "D") +
         theme_classic() +
         theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
               axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
@@ -319,10 +319,10 @@ phplot <-ggplot(wafulldata,aes(Year, pH_mean, color=Year), color=Year) +
 phplot
 
 ## plotting Salinity FULLDATA
-salinityplot <-ggplot(wafulldata,aes(Year,Salinity_mean,color=Year), color=Year) +
-        #scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
-        #geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
-        geom_point(size=4) +
+salinityplot <-ggplot(fulldata,aes(x=Year, y=Salinity_mean, fill=Year, group=Year)) +
+        geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+        geom_point(stat = "identity", size= 4, shape = 21, lwd=2, show.legend = FALSE) +
+        scale_fill_viridis(discrete = FALSE, option = "D") +
         theme_classic() +
         theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
               axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
@@ -330,44 +330,10 @@ salinityplot <-ggplot(wafulldata,aes(Year,Salinity_mean,color=Year), color=Year)
 salinityplot
 
 ## plotting SST FULLDATA
-sstplot <-ggplot(wafulldata,aes(Year,SST_mean,color=Year), color=Year) +
-        #scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
-        #geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
-        geom_point(size=4) +
-        theme_classic() +
-        theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
-              axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
-              panel.grid.minor=element_line(color=NA))
-sstplot
-
-## plotting pH DATAPRIOR
-datapriorwa <- subset(dataprior, dataprior$State =='WA')
-phplot <- ggplot(datapriorwa,aes(Year,pH_mean_2018)) +
-        #scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
-        #geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
-        geom_point(size=4) +
-        theme_classic() +
-        theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
-              axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
-              panel.grid.minor=element_line(color=NA))
-phplot
-
-## plotting Salinity DATAPRIOR
-salinityplot<-ggplot(datapriorwa,aes(Year,Salinity_mean_2017,color=Year), color=Year) +
-        #scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
-        #geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
-        geom_point(size=4) +
-        theme_classic() +
-        theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
-              axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
-              panel.grid.minor=element_line(color=NA))
-salinityplot
-
-## plotting SST DATAPRIOR
-sstplot<-ggplot(datapriorwa,aes(Year,SST_mean_2018,color=Year), color=Year) +
-        #scale_color_manual(values=wes_palette("GrandBudapest1", n = 4)) + 
-        #geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
-        geom_point(size=4) +
+sstplot <-ggplot(wafulldata,aes(x=Year, y=SST_mean, fill=Year, group=Year)) +
+        geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
+        geom_point(stat = "identity", size= 4, shape = 21, lwd=2, show.legend = FALSE) +
+        scale_fill_viridis(discrete = FALSE, option = "D") +
         theme_classic() +
         theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
               axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
@@ -375,25 +341,23 @@ sstplot<-ggplot(datapriorwa,aes(Year,SST_mean_2018,color=Year), color=Year) +
 sstplot
 
 
-### MODEL TESTING FOR ALL STATES
+### MODEL TESTING FOR WASHINGTON
 ###########################################################
-mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year_sc) + (1|Farm), family="binomial", data = wafulldata)
+mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year_sc) + (1|Farm), family="binomial", data = fulldata)
 summary(mod)
 anova(mod)
 vif(mod)
 car::Anova(mod, type=3) # getting p-values 
 
 ## for the next models I'll use only the subset  for the buoys with 2017-18 data
-mod3 <- glmer(Infested ~ pH_mean_2017 + SST_mean_2017 + Salinity_mean_2017 + (1|Farm), family="binomial", data = datapriorwa)
-summary(mod3)
-anova(mod3)
-vif(mod3)
-car::Anova(mod3, type=3) # getting p-values 
+mod2 <- glmer(Infested ~ pH_mean_2017 + SST_mean_2017 + Salinity_mean_2017 + (1|Farm), family="binomial", data = dataprior)
+summary(mod2)
+anova(mod2)
+car::Anova(mod2, type=3) # getting p-values 
 
-mod4 <- glmer(Infested ~ pH_mean_2018 + SST_mean_2018 + Salinity_mean_2018 + (1|Farm), family="binomial", data = datapriorwa)
+mod4 <- glmer(Infested ~ pH_mean_2018 + SST_mean_2018 + Salinity_mean_2018 + (1|Farm), family="binomial", data = dataprior)
 summary(mod4)
 anova(mod4)
-vif(mod4)
 car::Anova(mod4, type=3) # getting p-values 
 
 
