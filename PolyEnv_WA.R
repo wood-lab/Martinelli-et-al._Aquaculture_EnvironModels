@@ -1,5 +1,5 @@
 
-### WORKING DIRECTORY AND PACKAGES
+### PACKAGES
 ###########################################################
 library(tidyverse)
 library(tidyr)
@@ -368,9 +368,34 @@ summary(mod2)
 anova(mod2)
 car::Anova(mod2, type=3) # getting p-values 
 
-mod4 <- glmer(Infested ~ pH_mean_2017 + SST_mean_2018 + Salinity_mean_2018 + (1|Farm), family="binomial", data = dataprior)
+envmod_2017 <- ggpredict(mod2,"pH_mean_2017")
+
+envmod_2017 <- plot(mod2) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 2)) + 
+  geom_point(size=4) +
+  ylab(expression(paste("Predicted infestation"))) +
+  xlab(expression(paste("Mean pH 2017"))) +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color="white")) +
+  theme(plot.title=element_blank())
+envmod_2017
+
+
+mod4 <- glmer(Infested ~ pH_mean_2018 + SST_mean_2018 + Salinity_mean_2018 + (1|Farm), family="binomial", data = dataprior)
 summary(mod4)
 anova(mod4)
 car::Anova(mod4, type=3) # getting p-values 
 
+envmod_2018 <- ggpredict(mod4,"pH_mean_2018")
 
+envmod_2018 <- plot(mod4) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 2)) + 
+  geom_point(size=4) +
+  ylab(expression(paste("Predicted infestation"))) +
+  xlab(expression(paste("Mean pH 2017"))) +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color="white")) +
+  theme(plot.title=element_blank())
+envmod_2017
