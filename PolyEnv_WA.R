@@ -13,7 +13,7 @@ library(lubridate)
 library(car)
 library(wesanderson)
 library(viridis)
-
+library(ggeffects)
 
 # info from buoys loaded separately,then, all these files will be joined 
 # with the prev dataset that will be uploaded last
@@ -348,6 +348,19 @@ summary(mod)
 anova(mod)
 vif(mod)
 car::Anova(mod, type=3) # getting p-values 
+
+envmod <- ggpredict(mod,"pH_mean")
+
+envmod_plot <- plot(envmod) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 2)) + 
+  geom_point(size=4) +
+  ylab(expression(paste("Predicted infestation"))) +
+  xlab(expression(paste("Mean pH"))) +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color="white")) +
+  theme(plot.title=element_blank())
+envmod_plot
 
 ## for the next models I'll use only the subset  for the buoys with 2017-18 data
 mod2 <- glmer(Infested ~ pH_mean_2017 + SST_mean_2017 + Salinity_mean_2017 + (1|Farm), family="binomial", data = dataprior)
