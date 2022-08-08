@@ -39,11 +39,11 @@ data$ID <- paste(data$Year, data$Season, data$Buoy)
 
 
 # plotting env data just to check
-# plot <-  ggplot(data, aes(x= Season, y = Salinity, color=Salinity, show.legend = FALSE, fill=Season), na.rm=T)  +
-#         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm=T) + 
-#         scale_fill_brewer(palette="YlGnBu") +
-#         geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm=T) 
-# plot + theme_classic(base_size = 18) 
+plot <-  ggplot(data, aes(x= Season, y = Salinity, color=Salinity, show.legend = FALSE, fill=Season), na.rm=T)  +
+        geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm=T) +
+        scale_fill_brewer(palette="YlGnBu") +
+        geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm=T)
+plot + theme_classic(base_size = 18)
 
 ###########################################################
 ### Carr Inlet
@@ -62,11 +62,11 @@ carr <- carr %>% separate(Date, sep="-", into = c("Year"))
 carr$ID <- paste(carr$Year, carr$Season, carr$Buoy)
 
 # plotting env data just to check
-# plot <- ggplot(carr, aes(x= Season, y= Salinity, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
-#         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
-#         scale_fill_brewer(palette="YlGnBu") +
-#         geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE) 
-# plot + theme_classic(base_size = 18) 
+plot <- ggplot(carr, aes(x= Season, y= Salinity, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
+        geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) +
+        scale_fill_brewer(palette="YlGnBu") +
+        geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE)
+plot + theme_classic(base_size = 18)
 
 ###########################################################
 ### Cherry Point
@@ -85,11 +85,11 @@ cherry <- cherry %>% separate(Date, sep="-", into = c("Year"))
 cherry$ID <- paste(cherry$Year, cherry$Season, cherry$Buoy)
 
 # plotting env data just to check
-# plot <- ggplot(cherry, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
-#         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
-#         scale_fill_brewer(palette="YlGnBu") +
-#         geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE) 
-# plot + theme_classic(base_size = 18) 
+plot <- ggplot(cherry, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
+        geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) +
+        scale_fill_brewer(palette="YlGnBu") +
+        geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE)
+plot + theme_classic(base_size = 18)
 
 ###########################################################
 ### Hoodsport
@@ -108,11 +108,11 @@ hoodsport <- hoodsport %>% separate(Date, sep="-", into = c("Year"))
 hoodsport$ID <- paste(hoodsport$Year, hoodsport$Season, hoodsport$Buoy)
 
 # plotting env data just to check
-# plot <- ggplot(hoodsport, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season))  +
-#         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
-#         scale_fill_brewer(palette="YlGnBu") +
-#         geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE) 
-# plot + theme_classic(base_size = 18) 
+plot <- ggplot(hoodsport, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season))  +
+        geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) +
+        scale_fill_brewer(palette="YlGnBu") +
+        geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE)
+plot + theme_classic(base_size = 18)
 
 ###########################################################
 ### Port Townsend
@@ -131,11 +131,11 @@ ptownsend <- ptownsend %>% separate(Date, sep="-", into = c("Year"))
 ptownsend$ID <- paste(ptownsend$Year, ptownsend$Season, ptownsend$Buoy)
 
 # plotting env data just to check
-# plot <- ggplot(ptownsend, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
-#         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
-#         scale_fill_brewer(palette="YlGnBu") +
-#         geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE) 
-# plot + theme_classic(base_size = 18)
+plot <- ggplot(ptownsend, aes(x= Season, y= SST, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
+        geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) +
+        scale_fill_brewer(palette="YlGnBu") +
+        geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE)
+plot + theme_classic(base_size = 18)
 
 ###########################################################
 ### Tokeland
@@ -154,11 +154,11 @@ tokeland <- tokeland %>% separate(Date, sep="-", into = c("Year"))
 tokeland$ID <- paste(tokeland$Year, tokeland$Season, tokeland$Buoy)
 
 # plotting env data just to check
-# plot <- ggplot(tokeland, aes(x= Season, y= pH, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
-#         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
-#         scale_fill_brewer(palette="YlGnBu") +
-#         geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE) 
-# plot + theme_classic(base_size = 18)
+plot <- ggplot(tokeland, aes(x= Season, y= pH, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
+        geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) +
+        scale_fill_brewer(palette="YlGnBu") +
+        geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE)
+plot + theme_classic(base_size = 18)
 
 ###########################################################
 ### Bayview
@@ -179,11 +179,11 @@ todrop <- which(bayview$Salinity < 15)
 bayview <- bayview[-todrop,]
 
 # plotting env data just to check
-# plot <- ggplot(bayview, aes(x= Season, y= Salinity, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
-#         geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) + 
-#         scale_fill_brewer(palette="YlGnBu") +
-#         geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE) 
-# plot + theme_classic(base_size = 18)
+plot <- ggplot(bayview, aes(x= Season, y= Salinity, color=Season, show.legend= FALSE, fill= Season, na.rm = TRUE))  +
+        geom_boxplot(alpha=0.7, lwd=1, show.legend = FALSE, color='black', na.rm = TRUE) +
+        scale_fill_brewer(palette="YlGnBu") +
+        geom_point(size= 4, shape = 21, color= 'black', show.legend = FALSE, na.rm = TRUE)
+plot + theme_classic(base_size = 18)
 
 
 ########################
@@ -330,7 +330,7 @@ salinityplot <-ggplot(fulldata,aes(x=Year, y=Salinity_mean, fill=Year, group=Yea
 salinityplot
 
 ## plotting SST FULLDATA
-sstplot <-ggplot(wafulldata,aes(x=Year, y=SST_mean, fill=Year, group=Year)) +
+sstplot <-ggplot(fulldata,aes(x=Year, y=SST_mean, fill=Year, group=Year)) +
         geom_boxplot(alpha=0.7, lwd=1, outlier.shape = NA, show.legend = FALSE) + 
         geom_point(stat = "identity", size= 4, shape = 21, lwd=2, show.legend = FALSE) +
         scale_fill_viridis(discrete = FALSE, option = "D") +
@@ -343,7 +343,7 @@ sstplot
 
 ### MODEL TESTING FOR WASHINGTON
 ###########################################################
-mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year_sc) + (1|Farm), family="binomial", data = fulldata)
+mod <- glmer(Infested ~ pH_mean + SST_mean + Salinity_mean + (1|Year) + (1|Farm), family="binomial", data = fulldata)
 summary(mod)
 anova(mod)
 vif(mod)
@@ -355,7 +355,7 @@ summary(mod2)
 anova(mod2)
 car::Anova(mod2, type=3) # getting p-values 
 
-mod4 <- glmer(Infested ~ pH_mean_2018 + SST_mean_2018 + Salinity_mean_2018 + (1|Farm), family="binomial", data = dataprior)
+mod4 <- glmer(Infested ~ pH_mean_2017 + SST_mean_2018 + Salinity_mean_2018 + (1|Farm), family="binomial", data = dataprior)
 summary(mod4)
 anova(mod4)
 car::Anova(mod4, type=3) # getting p-values 
