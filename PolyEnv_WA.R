@@ -352,7 +352,7 @@ car::Anova(mod, type=3) # getting p-values
 envmod <- ggpredict(mod,"pH_mean")
 
 envmod_plot <- plot(envmod) +
-  scale_color_manual(values=wes_palette("GrandBudapest1", n = 2)) + 
+  scale_fill_manual(values=wes_palette("GrandBudapest1", n = 2)) + 
   geom_point(size=4) +
   ylab(expression(paste("Predicted infestation"))) +
   xlab(expression(paste("Mean pH"))) +
@@ -360,6 +360,19 @@ envmod_plot <- plot(envmod) +
         axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
         panel.grid.minor=element_line(color="white")) +
   theme(plot.title=element_blank())
+envmod_plot
+
+envmod_plot<-ggplot(envmod,aes(x,predicted,color=group), color=group) +
+  scale_color_manual(values=wes_palette("GrandBudapest1", n = 1)) + 
+  geom_point(size=4.5, show.legend = FALSE) +
+  geom_errorbar(data=envmod, mapping=aes(x=x, ymin=conf.low, ymax=conf.high), width=0.03, show.legend = FALSE) +
+  geom_line(aes(group=group), show.legend = FALSE) +
+  xlab("Mean pH") +
+  ylab(expression(paste("Predicted infestation"))) +
+  theme_classic() +
+  theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
+        axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
+        panel.grid.minor=element_line(color=NA))
 envmod_plot
 
 ## for the next models I'll use only the subset  for the buoys with 2017-18 data
