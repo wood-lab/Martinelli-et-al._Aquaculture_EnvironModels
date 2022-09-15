@@ -352,10 +352,11 @@ car::Anova(mod, type=3) # getting p-values
 envmod <- ggpredict(mod,"pH_mean")
 
 envmod_plot <- plot(envmod) +
-  scale_fill_manual(values=wes_palette("GrandBudapest1", n = 2)) + 
   geom_point(size=4) +
+  scale_fill_manual(values=wes_palette("GrandBudapest1", n = 2)) + 
   ylab(expression(paste("Predicted infestation"))) +
   xlab(expression(paste("Mean pH"))) +
+  theme_classic() +
   theme(plot.title=element_text(size=14,hjust=0.5,face="plain"), axis.text.y=element_text(size=14), 
         axis.title.y=element_text(size=14), axis.text.x=element_text(size=14), axis.title.x=element_text(size=14),
         panel.grid.minor=element_line(color="white")) +
